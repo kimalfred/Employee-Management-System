@@ -64,6 +64,7 @@ public class UserLeave extends javax.swing.JInternalFrame {
         stat = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         in = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -260,16 +261,27 @@ public class UserLeave extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel8.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Submit sick leave request");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(in, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addComponent(jLabel8)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addGap(0, 57, Short.MAX_VALUE)
+                .addGap(0, 30, Short.MAX_VALUE)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(in, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -345,44 +357,55 @@ public class UserLeave extends javax.swing.JInternalFrame {
 
     private void inActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inActionPerformed
         try {
-                String sname = name.getText();
-                String employeeId = empid.getText();
-                String semail = email.getText();
-                Date selectedstart = start.getDate();
-                Date selectedend = end.getDate();
-                String lres = res.getText();
-                String lstat = stat.getText();
+            String sname = name.getText();
+            String employeeId = empid.getText();
+            String semail = email.getText();
+            Date selectedstart = start.getDate();
+            Date selectedend = end.getDate();
+            String lres = res.getText();
+            String lstat = stat.getText();
 
-                String url = "jdbc:mysql://localhost/javadb";
-                String dbUsername = "root";
-                String dbPassword = "";
+            String url = "jdbc:mysql://localhost/javadb";
+            String dbUsername = "root";
+            String dbPassword = "";
 
-                try (Connection con = DriverManager.getConnection(url, dbUsername, dbPassword)) {
-                    con.setAutoCommit(false); 
+            try (Connection con = DriverManager.getConnection(url, dbUsername, dbPassword)) {
+                con.setAutoCommit(false);
 
-                    String insertQuery = "INSERT INTO emp_leave (employee_id, name, email, start, end, reason, status) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                // Check if there is already a pending leave request
+                String checkQuery = "SELECT COUNT(*) FROM emp_leave WHERE email = ? AND status = 'Pending'";
+                try (PreparedStatement checkPst = con.prepareStatement(checkQuery)) {
+                    checkPst.setString(1, semail);
+                    ResultSet rs = checkPst.executeQuery();
+                    if (rs.next() && rs.getInt(1) > 0) {
+                        JOptionPane.showMessageDialog(this, "You already have a pending sick leave request.");
+                        return; // Exit the method, no further processing
+                    }
+                }
 
-                    try (PreparedStatement pst = con.prepareStatement(insertQuery)) {
-                        pst.setString(1, employeeId);
-                        pst.setString(2, sname);
-                        pst.setString(3, semail);
+                String insertQuery = "INSERT INTO emp_leave (employee_id, name, email, start, end, reason, status) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-                        java.sql.Date sqlStartDate = new java.sql.Date(selectedstart.getTime());
-                        java.sql.Date sqlEndDate = new java.sql.Date(selectedend.getTime());
+                try (PreparedStatement pst = con.prepareStatement(insertQuery)) {
+                    pst.setString(1, employeeId);
+                    pst.setString(2, sname);
+                    pst.setString(3, semail);
 
-                        pst.setDate(4, sqlStartDate);
-                        pst.setDate(5, sqlEndDate);
-                        pst.setString(6, lres);
-                        pst.setString(7, lstat);
+                    java.sql.Date sqlStartDate = new java.sql.Date(selectedstart.getTime());
+                    java.sql.Date sqlEndDate = new java.sql.Date(selectedend.getTime());
 
-                        int rowsAffected = pst.executeUpdate();
+                    pst.setDate(4, sqlStartDate);
+                    pst.setDate(5, sqlEndDate);
+                    pst.setString(6, lres);
+                    pst.setString(7, lstat);
 
-                        if (rowsAffected > 0) {
-                            con.commit(); 
-                            JOptionPane.showMessageDialog(this, "Time In Successfully!");
-                        } else {
-                            JOptionPane.showMessageDialog(this, "Failed to Time In");
-                        }
+                    int rowsAffected = pst.executeUpdate();
+
+                    if (rowsAffected > 0) {
+                        con.commit();
+                        JOptionPane.showMessageDialog(this, "Sick Leave submitted, wait for approval.");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Failed to submit Sick Leave.");
+                    }
                 }
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(this, "An error occurred. Please check console for details.");
@@ -408,6 +431,7 @@ public class UserLeave extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

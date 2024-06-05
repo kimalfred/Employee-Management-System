@@ -83,7 +83,7 @@ public class UserPanel extends javax.swing.JFrame {
             }
         });
 
-        home.setBackground(new java.awt.Color(255, 255, 255));
+        home.setBackground(new java.awt.Color(102, 102, 102));
         home.setPreferredSize(new java.awt.Dimension(120, 8));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -118,7 +118,7 @@ public class UserPanel extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        attend.setBackground(new java.awt.Color(255, 255, 255));
+        attend.setBackground(new java.awt.Color(102, 102, 102));
         attend.setPreferredSize(new java.awt.Dimension(120, 8));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -153,7 +153,7 @@ public class UserPanel extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        proj.setBackground(new java.awt.Color(255, 255, 255));
+        proj.setBackground(new java.awt.Color(102, 102, 102));
         proj.setPreferredSize(new java.awt.Dimension(90, 8));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -188,7 +188,7 @@ public class UserPanel extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        sick.setBackground(new java.awt.Color(255, 255, 255));
+        sick.setBackground(new java.awt.Color(102, 102, 102));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
@@ -222,7 +222,7 @@ public class UserPanel extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        sal.setBackground(new java.awt.Color(255, 255, 255));
+        sal.setBackground(new java.awt.Color(102, 102, 102));
         sal.setPreferredSize(new java.awt.Dimension(80, 8));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
