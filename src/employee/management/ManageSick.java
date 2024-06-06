@@ -263,6 +263,11 @@ public class ManageSick extends javax.swing.JInternalFrame {
             String lres = res.getText();
             String lstat = stat.getText();
 
+            if (sname.isEmpty() || employeeId.isEmpty() || semail.isEmpty() || selectedstart == null || selectedend == null || lres.isEmpty() || lstat.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please fill in all fields.");
+                return; 
+            }
+
             String url = "jdbc:mysql://localhost/javadb";
             String dbUsername = "root";
             String dbPassword = "";
@@ -270,14 +275,14 @@ public class ManageSick extends javax.swing.JInternalFrame {
             try (Connection con = DriverManager.getConnection(url, dbUsername, dbPassword)) {
                 con.setAutoCommit(false);
 
-                // Check if there is already a pending leave request
+
                 String checkQuery = "SELECT COUNT(*) FROM emp_leave WHERE email = ? AND status = 'Pending'";
                 try (PreparedStatement checkPst = con.prepareStatement(checkQuery)) {
                     checkPst.setString(1, semail);
                     ResultSet rs = checkPst.executeQuery();
                     if (rs.next() && rs.getInt(1) > 0) {
                         JOptionPane.showMessageDialog(this, "You already have a pending sick leave request.");
-                        return; // Exit the method, no further processing
+                        return; 
                     }
                 }
 

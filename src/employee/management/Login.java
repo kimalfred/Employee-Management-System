@@ -208,7 +208,7 @@ public class Login extends javax.swing.JFrame {
 
         if (rs.next()) {
             String userType = rs.getString("usertype");
-            JOptionPane.showMessageDialog(this, "Welcome! You are Logged in as " + userType);
+            JOptionPane.showMessageDialog(this, "Welcome! You are logged in as " + userType);
 
             if ("Admin".equals(userType)) {
                 AdminPanel a = new AdminPanel();

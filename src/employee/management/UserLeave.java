@@ -263,7 +263,7 @@ public class UserLeave extends javax.swing.JInternalFrame {
 
         jLabel8.setBackground(new java.awt.Color(0, 0, 0));
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Submit sick leave request");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -365,6 +365,11 @@ public class UserLeave extends javax.swing.JInternalFrame {
             String lres = res.getText();
             String lstat = stat.getText();
 
+            if (sname.isEmpty() || employeeId.isEmpty() || semail.isEmpty() || selectedstart == null || selectedend == null || lres.isEmpty() || lstat.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please fill in all fields.");
+                return; 
+            }
+
             String url = "jdbc:mysql://localhost/javadb";
             String dbUsername = "root";
             String dbPassword = "";
@@ -372,14 +377,14 @@ public class UserLeave extends javax.swing.JInternalFrame {
             try (Connection con = DriverManager.getConnection(url, dbUsername, dbPassword)) {
                 con.setAutoCommit(false);
 
-                // Check if there is already a pending leave request
+
                 String checkQuery = "SELECT COUNT(*) FROM emp_leave WHERE email = ? AND status = 'Pending'";
                 try (PreparedStatement checkPst = con.prepareStatement(checkQuery)) {
                     checkPst.setString(1, semail);
                     ResultSet rs = checkPst.executeQuery();
                     if (rs.next() && rs.getInt(1) > 0) {
                         JOptionPane.showMessageDialog(this, "You already have a pending sick leave request.");
-                        return; // Exit the method, no further processing
+                        return; 
                     }
                 }
 
