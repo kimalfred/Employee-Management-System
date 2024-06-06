@@ -221,12 +221,13 @@ public class Login extends javax.swing.JFrame {
                 this.setVisible(false);
             } else if ("Employee".equals(userType)) {
                 UserPanel e = new UserPanel();
+                e.email.setText(email.getText());
                 e.setVisible(true);
                 this.setVisible(false);
             }
 
             } else {
-                JOptionPane.showMessageDialog(this, "UserName or Password do not Matched!!");
+                JOptionPane.showMessageDialog(this, "Username or Password do not Matched!!");
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());

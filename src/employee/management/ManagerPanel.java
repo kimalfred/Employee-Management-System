@@ -33,7 +33,7 @@ public class ManagerPanel extends javax.swing.JFrame {
         void showDate() {
         Date d = new Date();
         SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
-        jLabel13.setText(s.format(d));
+        date.setText(s.format(d));
 
     }
 
@@ -62,7 +62,7 @@ public class ManagerPanel extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         time = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
+        date = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -107,9 +107,9 @@ public class ManagerPanel extends javax.swing.JFrame {
         time.setForeground(new java.awt.Color(255, 255, 255));
         time.setText("Time");
 
-        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setText("Date");
+        date.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        date.setForeground(new java.awt.Color(255, 255, 255));
+        date.setText("Date");
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 3, 48)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
@@ -122,7 +122,7 @@ public class ManagerPanel extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel13)
+                        .addComponent(date)
                         .addGap(181, 181, 181)
                         .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(time))
@@ -138,7 +138,7 @@ public class ManagerPanel extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(time)
                         .addGap(2, 2, 2)
-                        .addComponent(jLabel13)))
+                        .addComponent(date)))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
@@ -782,6 +782,7 @@ public class ManagerPanel extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel attend;
+    private javax.swing.JLabel date;
     private javax.swing.JPanel dept;
     public static javax.swing.JLabel email;
     private javax.swing.JPanel emp;
@@ -792,7 +793,6 @@ public class ManagerPanel extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
