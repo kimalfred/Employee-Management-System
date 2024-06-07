@@ -4,6 +4,7 @@
  */
 package employee.management;
 
+import static employee.management.Login.email;
 import java.awt.Color;
 
 /**
@@ -393,9 +394,10 @@ public class UserPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-        UserAttendance home=new UserAttendance();
+        UserAttendance home = new UserAttendance();
         user.removeAll();
         user.add(home).setVisible(true);
+        home.search.setText(email.getText());
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
@@ -408,6 +410,7 @@ public class UserPanel extends javax.swing.JFrame {
         UserLeave home=new UserLeave();
         user.removeAll();
         user.add(home).setVisible(true);
+        home.search.setText(email.getText());
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked

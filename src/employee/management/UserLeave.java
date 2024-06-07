@@ -445,7 +445,7 @@ public class UserLeave extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel name;
     private javax.swing.JTextArea res;
-    private javax.swing.JTextField search;
+    public static javax.swing.JTextField search;
     private com.toedter.calendar.JDateChooser start;
     private javax.swing.JLabel stat;
     // End of variables declaration//GEN-END:variables

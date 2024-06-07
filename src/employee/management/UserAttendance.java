@@ -521,7 +521,7 @@ public class UserAttendance extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JButton out;
     private javax.swing.JLabel post;
-    private javax.swing.JTextField search;
+    public static javax.swing.JTextField search;
     private javax.swing.JLabel timein;
     private javax.swing.JLabel uname;
     // End of variables declaration//GEN-END:variables
