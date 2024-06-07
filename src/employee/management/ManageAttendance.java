@@ -505,7 +505,7 @@ public class ManageAttendance extends javax.swing.JInternalFrame {
     private javax.swing.JButton out;
     private javax.swing.JLabel post;
     private javax.swing.JLabel postlbl;
-    private javax.swing.JTextField search;
+    public static javax.swing.JTextField search;
     private javax.swing.JLabel timein;
     private javax.swing.JLabel uname;
     // End of variables declaration//GEN-END:variables

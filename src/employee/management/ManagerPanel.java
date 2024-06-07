@@ -5,6 +5,7 @@
 package employee.management;
 
 import static employee.management.Login.email;
+import static employee.management.UserPanel.email;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
@@ -707,6 +708,7 @@ public class ManagerPanel extends javax.swing.JFrame {
         ManageAttendance sal=new ManageAttendance();
         manage.removeAll();
         manage.add(sal).setVisible(true);
+        sal.search.setText(email.getText());
     }//GEN-LAST:event_jLabel19MouseClicked
 
     private void jLabel19MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel19MouseEntered
