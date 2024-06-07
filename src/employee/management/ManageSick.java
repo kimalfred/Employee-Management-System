@@ -339,7 +339,7 @@ public class ManageSick extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel namelbl;
     private javax.swing.JTextArea res;
-    private javax.swing.JTextField search;
+    public static javax.swing.JTextField search;
     private com.toedter.calendar.JDateChooser start;
     private javax.swing.JLabel stat;
     private javax.swing.JLabel uname;

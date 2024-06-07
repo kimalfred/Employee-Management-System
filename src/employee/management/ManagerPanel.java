@@ -638,6 +638,7 @@ public class ManagerPanel extends javax.swing.JFrame {
         ManageSick sick=new ManageSick();
         manage.removeAll();
         manage.add(sick).setVisible(true);
+        sick.search.setText(email.getText());
     }//GEN-LAST:event_jLabel9MouseClicked
 
     private void jLabel9MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MousePressed
