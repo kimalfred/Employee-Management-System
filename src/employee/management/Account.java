@@ -366,7 +366,7 @@ public class Account extends javax.swing.JFrame {
     private void emailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_emailKeyReleased
         try {
             String query = "SELECT * FROM emptb WHERE email = ?";
-            con = DriverManager.getConnection("jdbc:mysql://localhost/javadb", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/javadb", "root", "");           
 
             String sql = "SELECT * FROM emptb WHERE email = ?";
             PreparedStatement pst = con.prepareStatement(sql);

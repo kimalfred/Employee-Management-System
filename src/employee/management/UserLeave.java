@@ -383,7 +383,7 @@ public class UserLeave extends javax.swing.JInternalFrame {
                     checkPst.setString(1, semail);
                     ResultSet rs = checkPst.executeQuery();
                     if (rs.next() && rs.getInt(1) > 0) {
-                        JOptionPane.showMessageDialog(this, "You already have a pending sick leave request.");
+                        JOptionPane.showMessageDialog(this, "You already have a pending sick leave request.");                        
                         return; 
                     }
                 }
@@ -408,6 +408,7 @@ public class UserLeave extends javax.swing.JInternalFrame {
                     if (rowsAffected > 0) {
                         con.commit();
                         JOptionPane.showMessageDialog(this, "Sick Leave submitted, wait for approval.");
+                        JOptionPane.showMessageDialog(this, "Check your account for approval");
                     } else {
                         JOptionPane.showMessageDialog(this, "Failed to submit Sick Leave.");
                     }
