@@ -1,8 +1,10 @@
 # Employee Management System
 Employee Managemnet System using Java GUI and MySQL Database
 
-
+## Setup Mailer in Java
 To setup your Java Mailer download mail.jar here https://javaee.github.io/javamail/
+
+![image](https://github.com/kimalfred/Employee-Management-System/assets/119164038/d341ea48-32f6-4d7c-abdb-25ea2265d338)
 
 ```
 //import this for mailer
