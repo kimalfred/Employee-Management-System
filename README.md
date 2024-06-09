@@ -58,6 +58,8 @@ To enable email functionality in the project, follow these steps:
 ### Implementing Email Functionality
 Here is the code snippet to set up the mailer in your Java application. This can be integrated into your email-sending logic in the application (e.g., for notifications).
 
+![javaemail](https://github.com/kimalfred/Employee-Management-System/assets/119164038/1c6a960f-2672-481b-9c85-83d833723927)
+
 ```java
 //import this for mailer
 import java.util.Properties;
