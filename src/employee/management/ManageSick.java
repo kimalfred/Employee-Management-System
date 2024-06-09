@@ -306,7 +306,7 @@ public class ManageSick extends javax.swing.JInternalFrame {
                     if (rowsAffected > 0) {
                         con.commit();
                         JOptionPane.showMessageDialog(this, "Sick Leave submitted, wait for approval.");
-                        JOptionPane.showMessageDialog(this, "Check your account for approval");
+                        JOptionPane.showMessageDialog(this, "Check your address for approval");
                     } else {
                         JOptionPane.showMessageDialog(this, "Failed to submit Sick Leave.");
                     }

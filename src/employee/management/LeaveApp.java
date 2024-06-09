@@ -4,6 +4,7 @@
  */
 package employee.management;
 
+import static employee.management.Login.email;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -37,7 +38,7 @@ public class LeaveApp extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
+        label = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         search = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
@@ -61,9 +62,9 @@ public class LeaveApp extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 102));
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel9.setText("Employee Leave");
+        label.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        label.setForeground(new java.awt.Color(0, 0, 0));
+        label.setText("Employee Leave");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -71,14 +72,14 @@ public class LeaveApp extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel9)
+                .addComponent(label)
                 .addGap(196, 196, 196))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel9)
+                .addComponent(label)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -355,7 +356,11 @@ public class LeaveApp extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "An error occurred. Please check console for details.");
             ex.printStackTrace();
         }
-
+        
+        Email x = new Email();
+        x.setVisible(true);
+        x.txtSubject.setText(label.getText());
+        dispose(); 
     }//GEN-LAST:event_upleaveActionPerformed
 
     private void clearMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearMouseEntered
@@ -436,10 +441,10 @@ public class LeaveApp extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    public static javax.swing.JLabel label;
     private javax.swing.JLabel name;
     private javax.swing.JTextArea res;
     private javax.swing.JTextField search;

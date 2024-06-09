@@ -52,9 +52,11 @@ public class UserPanel extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 102));
         jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(4, 4, 4, 4, new java.awt.Color(102, 102, 102)));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/employee/management/1.png"))); // NOI18N
         jLabel1.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(255, 255, 0)));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(68, 65, -1, 80));
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -65,6 +67,7 @@ public class UserPanel extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(68, 157, 88, 35));
 
         log.setBackground(new java.awt.Color(102, 102, 102));
         log.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -85,6 +88,7 @@ public class UserPanel extends javax.swing.JFrame {
                 logActionPerformed(evt);
             }
         });
+        jPanel1.add(log, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 676, 220, -1));
 
         home.setBackground(new java.awt.Color(102, 102, 102));
         home.setPreferredSize(new java.awt.Dimension(120, 8));
@@ -121,6 +125,8 @@ public class UserPanel extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jPanel1.add(home, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 247, 222, 45));
+
         attend.setBackground(new java.awt.Color(102, 102, 102));
         attend.setPreferredSize(new java.awt.Dimension(120, 8));
 
@@ -155,6 +161,8 @@ public class UserPanel extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addContainerGap())
         );
+
+        jPanel1.add(attend, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 304, 222, 45));
 
         proj.setBackground(new java.awt.Color(102, 102, 102));
         proj.setPreferredSize(new java.awt.Dimension(90, 8));
@@ -191,6 +199,8 @@ public class UserPanel extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jPanel1.add(proj, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 361, 222, 45));
+
         sick.setBackground(new java.awt.Color(102, 102, 102));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -224,6 +234,8 @@ public class UserPanel extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addContainerGap())
         );
+
+        jPanel1.add(sick, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 418, 222, -1));
 
         sal.setBackground(new java.awt.Color(102, 102, 102));
         sal.setPreferredSize(new java.awt.Dimension(80, 8));
@@ -260,61 +272,17 @@ public class UserPanel extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jPanel1.add(sal, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 475, 222, 45));
+
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Welcome");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 4, -1, -1));
 
         email.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         email.setForeground(new java.awt.Color(0, 0, 0));
         email.setText("Email");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(home, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
-            .addComponent(attend, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
-            .addComponent(proj, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
-            .addComponent(sick, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(sal, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(64, 64, 64)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(email)))
-                .addGap(58, 70, Short.MAX_VALUE))
-            .addComponent(log, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(email))
-                .addGap(44, 44, 44)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55)
-                .addComponent(home, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(attend, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(proj, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(sick, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(sal, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 156, Short.MAX_VALUE)
-                .addComponent(log, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        jPanel1.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(78, 4, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 720));
 
