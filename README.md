@@ -45,7 +45,7 @@ The Employee Management System is a comprehensive application designed to manage
     git clone https://github.com/yourusername/Employee-Management-System.git
     cd Employee-Management-System
     ```
-2. Open the project in your preferred IDE (e.g., IntelliJ IDEA, Eclipse).
+2. Open the project in Netbeans.
 3. Add `mail.jar` to your project library.
 4. Configure your database connection in the project.
 
