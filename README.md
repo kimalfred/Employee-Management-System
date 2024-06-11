@@ -15,7 +15,7 @@ The Employee Management System is a comprehensive application designed to manage
 
 - **Leave Management:**
   - Employees can apply for leave.
-  - Managers can approve or reject leave requests.
+  - Admins & Managers can approve or reject leave requests.
 
 - **Salary Management:**
   - View and manage employee salary details.
