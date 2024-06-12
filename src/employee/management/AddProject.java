@@ -4,15 +4,22 @@
  */
 package employee.management;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Kim Alfred
  */
 public class AddProject extends javax.swing.JFrame {
 
-    /**
-     * Creates new form AddProject
-     */
+    Connection con = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
+    
     public AddProject() {
         initComponents();
     }
@@ -29,11 +36,31 @@ public class AddProject extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        search2 = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        empid = new javax.swing.JTextField();
+        dept = new javax.swing.JTextField();
+        name = new javax.swing.JTextField();
+        email = new javax.swing.JTextField();
+        post = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        assigndate = new com.toedter.calendar.JDateChooser();
+        jLabel8 = new javax.swing.JLabel();
+        duedate = new com.toedter.calendar.JDateChooser();
+        jLabel9 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel1.setText("Project Deployment");
@@ -43,35 +70,158 @@ public class AddProject extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(299, 299, 299)
+                .addGap(300, 300, 300)
                 .addComponent(jLabel1)
-                .addContainerGap(302, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(20, 20, 20)
                 .addComponent(jLabel1)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 645, Short.MAX_VALUE))
-        );
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 730));
+        search2.setBackground(new java.awt.Color(255, 255, 255));
+        search2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        search2.setForeground(new java.awt.Color(0, 0, 0));
+        search2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                search2ActionPerformed(evt);
+            }
+        });
+        search2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                search2KeyReleased(evt);
+            }
+        });
+        jPanel1.add(search2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 140, 365, 50));
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel11.setText("Search Employee ID");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 117, -1, -1));
+
+        empid.setBackground(new java.awt.Color(255, 255, 255));
+        empid.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        empid.setForeground(new java.awt.Color(0, 0, 0));
+        empid.setEnabled(false);
+        jPanel1.add(empid, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 260, 290, 45));
+
+        dept.setBackground(new java.awt.Color(255, 255, 255));
+        dept.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        dept.setForeground(new java.awt.Color(0, 0, 0));
+        dept.setEnabled(false);
+        jPanel1.add(dept, new org.netbeans.lib.awtextra.AbsoluteConstraints(342, 260, 290, 45));
+
+        name.setBackground(new java.awt.Color(255, 255, 255));
+        name.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        name.setForeground(new java.awt.Color(0, 0, 0));
+        name.setEnabled(false);
+        jPanel1.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 344, 290, 45));
+
+        email.setBackground(new java.awt.Color(255, 255, 255));
+        email.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        email.setForeground(new java.awt.Color(0, 0, 0));
+        email.setEnabled(false);
+        jPanel1.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 428, 290, 45));
+
+        post.setBackground(new java.awt.Color(255, 255, 255));
+        post.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        post.setForeground(new java.awt.Color(0, 0, 0));
+        post.setEnabled(false);
+        jPanel1.add(post, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 512, 290, 45));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel2.setText("Employee ID");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 239, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel3.setText("Position");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 491, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel4.setText("Name");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 323, -1, -1));
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel5.setText("Email");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 407, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel6.setText("Department");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(342, 239, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel7.setText("Assign Date");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(342, 323, -1, -1));
+
+        assigndate.setBackground(new java.awt.Color(255, 255, 255));
+        assigndate.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.add(assigndate, new org.netbeans.lib.awtextra.AbsoluteConstraints(342, 344, 290, 45));
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel8.setText("Due Date");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(342, 407, -1, -1));
+
+        duedate.setBackground(new java.awt.Color(255, 255, 255));
+        duedate.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.add(duedate, new org.netbeans.lib.awtextra.AbsoluteConstraints(342, 428, 290, 45));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel9.setText("Project Description");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(661, 239, -1, -1));
+
+        jTextArea1.setBackground(new java.awt.Color(255, 255, 255));
+        jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jTextArea1.setForeground(new java.awt.Color(0, 0, 0));
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(661, 260, 290, 300));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, 730));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void search2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_search2ActionPerformed
+
+    private void search2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search2KeyReleased
+        try {
+            String query = "SELECT * FROM emptb WHERE employee_id = ?";
+            con = DriverManager.getConnection("jdbc:mysql://localhost/javadb", "root", "");
+
+            String sql = "SELECT * FROM emptb WHERE employee_id = ?";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1, search2.getText());
+
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                String setid = rs.getString("employee_id");
+                empid.setText(setid);
+
+                String setname = rs.getString("name");
+                name.setText(setname);
+
+                String setemail = rs.getString("email");
+                email.setText(setemail);
+
+                String setPosition = rs.getString("position");
+                post.setText(setPosition);
+
+                String setDepartment = rs.getString("department");
+                dept.setText(setDepartment);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_search2KeyReleased
 
     /**
      * @param args the command line arguments
@@ -109,8 +259,29 @@ public class AddProject extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.toedter.calendar.JDateChooser assigndate;
+    private javax.swing.JTextField dept;
+    private com.toedter.calendar.JDateChooser duedate;
+    private javax.swing.JTextField email;
+    private javax.swing.JTextField empid;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextField name;
+    private javax.swing.JTextField post;
+    private javax.swing.JTextField search;
+    private javax.swing.JTextField search1;
+    private javax.swing.JTextField search2;
     // End of variables declaration//GEN-END:variables
 }
