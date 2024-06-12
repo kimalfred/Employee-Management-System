@@ -400,7 +400,7 @@ public class AddProject extends javax.swing.JFrame {
             String nameadd = name.getText();
             String emailadd = email.getText();
             String position = post.getText();
-            String department = dept.getText();                
+            String department = dept.getText();
             Date assign = assigndate.getDate();
             Date due = duedate.getDate();
             String descript = description.getText();
@@ -415,33 +415,42 @@ public class AddProject extends javax.swing.JFrame {
                 String dbPassword = "";
 
                 try (Connection con = DriverManager.getConnection(url, dbUsername, dbPassword)) {
-                    String insertQuery = "INSERT INTO project_db (employee_id, name, email, position, department, assigndate, duedate, proj_desc) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                    String checkQuery = "SELECT COUNT(*) FROM project_db WHERE employee_id = ?";
+                    try (PreparedStatement checkPst = con.prepareStatement(checkQuery)) {
+                        checkPst.setString(1, employeeId);
+                        try (ResultSet rs = checkPst.executeQuery()) {
+                            if (rs.next() && rs.getInt(1) > 0) {
+                                JOptionPane.showMessageDialog(this, "This employee already has an assigned project.", "Duplicate Record", JOptionPane.WARNING_MESSAGE);
+                            } else {
+                                String insertQuery = "INSERT INTO project_db (employee_id, name, email, position, department, assigndate, duedate, proj_desc) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                                try (PreparedStatement pst = con.prepareStatement(insertQuery)) {
+                                    pst.setString(1, employeeId);
+                                    pst.setString(2, nameadd);
+                                    pst.setString(3, emailadd);
+                                    pst.setString(4, position);
+                                    pst.setString(5, department);
 
-                    try (PreparedStatement pst = con.prepareStatement(insertQuery)) {
-                        pst.setString(1, employeeId);
-                        pst.setString(2, nameadd);
-                        pst.setString(3, emailadd);
-                        pst.setString(4, position);
-                        pst.setString(5, department);
+                                    java.sql.Date assigndates = new java.sql.Date(assign.getTime());
+                                    java.sql.Date duedates = new java.sql.Date(due.getTime());
 
-                        java.sql.Date assigndates = new java.sql.Date(assign.getTime());
-                        java.sql.Date duedates = new java.sql.Date(due.getTime());
+                                    pst.setDate(6, assigndates);
+                                    pst.setDate(7, duedates);
+                                    pst.setString(8, descript);
 
-                        pst.setDate(6, assigndates);
-                        pst.setDate(7, duedates);                       
-                        pst.setString(8, descript);
+                                    int rowsAffected = pst.executeUpdate();
 
-                        int rowsAffected = pst.executeUpdate();
-
-                        if (rowsAffected > 0) {
-                            JOptionPane.showMessageDialog(this, "Project added successfully!");
-                        } else {
-                            JOptionPane.showMessageDialog(this, "Failed to add project.");
+                                    if (rowsAffected > 0) {
+                                        JOptionPane.showMessageDialog(this, "Project added successfully!");
+                                    } else {
+                                        JOptionPane.showMessageDialog(this, "Failed to add project.");
+                                    }
+                                }
+                            }
                         }
                     }
                 } catch (SQLException ex) {
                     JOptionPane.showMessageDialog(this, "An error occurred. Please check console for details.");
-                    ex.printStackTrace(); // Print detailed error information
+                    ex.printStackTrace();
                 }
             }
         } catch (Exception e) {
