@@ -4,10 +4,13 @@
  */
 package employee.management;
 
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -36,6 +39,7 @@ public class AddProject extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        exit = new javax.swing.JButton();
         search2 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         empid = new javax.swing.JTextField();
@@ -54,16 +58,35 @@ public class AddProject extends javax.swing.JFrame {
         duedate = new com.toedter.calendar.JDateChooser();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        description = new javax.swing.JTextArea();
+        clear = new javax.swing.JButton();
+        add = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 102));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel1.setText("Project Deployment");
+
+        exit.setBackground(new java.awt.Color(204, 0, 0));
+        exit.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        exit.setForeground(new java.awt.Color(0, 0, 0));
+        exit.setText("Exit");
+        exit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                exitMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                exitMouseExited(evt);
+            }
+        });
+        exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -72,7 +95,8 @@ public class AddProject extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(300, 300, 300)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(exit))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -80,9 +104,10 @@ public class AddProject extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addComponent(jLabel1)
                 .addContainerGap(21, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(exit)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
-
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, -1));
 
         search2.setBackground(new java.awt.Color(255, 255, 255));
         search2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -97,90 +122,202 @@ public class AddProject extends javax.swing.JFrame {
                 search2KeyReleased(evt);
             }
         });
-        jPanel1.add(search2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 140, 365, 50));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel11.setText("Search Employee ID");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 117, -1, -1));
 
         empid.setBackground(new java.awt.Color(255, 255, 255));
         empid.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         empid.setForeground(new java.awt.Color(0, 0, 0));
         empid.setEnabled(false);
-        jPanel1.add(empid, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 260, 290, 45));
 
         dept.setBackground(new java.awt.Color(255, 255, 255));
         dept.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         dept.setForeground(new java.awt.Color(0, 0, 0));
         dept.setEnabled(false);
-        jPanel1.add(dept, new org.netbeans.lib.awtextra.AbsoluteConstraints(342, 260, 290, 45));
 
         name.setBackground(new java.awt.Color(255, 255, 255));
         name.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         name.setForeground(new java.awt.Color(0, 0, 0));
         name.setEnabled(false);
-        jPanel1.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 344, 290, 45));
 
         email.setBackground(new java.awt.Color(255, 255, 255));
         email.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         email.setForeground(new java.awt.Color(0, 0, 0));
         email.setEnabled(false);
-        jPanel1.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 428, 290, 45));
 
         post.setBackground(new java.awt.Color(255, 255, 255));
         post.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         post.setForeground(new java.awt.Color(0, 0, 0));
         post.setEnabled(false);
-        jPanel1.add(post, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 512, 290, 45));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Employee ID");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 239, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("Position");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 491, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Name");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 323, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setText("Email");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 407, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("Department");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(342, 239, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setText("Assign Date");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(342, 323, -1, -1));
 
         assigndate.setBackground(new java.awt.Color(255, 255, 255));
         assigndate.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel1.add(assigndate, new org.netbeans.lib.awtextra.AbsoluteConstraints(342, 344, 290, 45));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setText("Due Date");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(342, 407, -1, -1));
 
         duedate.setBackground(new java.awt.Color(255, 255, 255));
         duedate.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel1.add(duedate, new org.netbeans.lib.awtextra.AbsoluteConstraints(342, 428, 290, 45));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel9.setText("Project Description");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(661, 239, -1, -1));
 
-        jTextArea1.setBackground(new java.awt.Color(255, 255, 255));
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextArea1.setForeground(new java.awt.Color(0, 0, 0));
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        description.setBackground(new java.awt.Color(255, 255, 255));
+        description.setColumns(20);
+        description.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        description.setForeground(new java.awt.Color(0, 0, 0));
+        description.setRows(5);
+        jScrollPane1.setViewportView(description);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(661, 260, 290, 300));
+        clear.setBackground(new java.awt.Color(255, 255, 255));
+        clear.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        clear.setForeground(new java.awt.Color(0, 0, 0));
+        clear.setText("Clear Text");
+        clear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                clearMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                clearMouseExited(evt);
+            }
+        });
+        clear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearActionPerformed(evt);
+            }
+        });
+
+        add.setBackground(new java.awt.Color(255, 255, 255));
+        add.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        add.setForeground(new java.awt.Color(0, 0, 0));
+        add.setIcon(new javax.swing.ImageIcon(getClass().getResource("/employee/management/plus.png"))); // NOI18N
+        add.setText("Add Project");
+        add.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                addMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                addMouseExited(evt);
+            }
+        });
+        add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel11))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(search2, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2)
+                        .addGap(248, 248, 248)
+                        .addComponent(jLabel6)
+                        .addGap(245, 245, 245)
+                        .addComponent(jLabel9))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(empid, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)
+                            .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)
+                            .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(post, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(34, 34, 34)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(dept, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7)
+                            .addComponent(assigndate, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8)
+                            .addComponent(duedate, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(29, 29, 29)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 19, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(309, 309, 309)
+                .addComponent(add)
+                .addGap(36, 36, 36)
+                .addComponent(clear, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(jLabel11)
+                .addGap(6, 6, 6)
+                .addComponent(search2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(49, 49, 49)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel9))
+                .addGap(6, 6, 6)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(empid, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel4)
+                        .addGap(6, 6, 6)
+                        .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel5)
+                        .addGap(6, 6, 6)
+                        .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3)
+                        .addGap(6, 6, 6)
+                        .addComponent(post, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(dept, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel7)
+                        .addGap(6, 6, 6)
+                        .addComponent(assigndate, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel8)
+                        .addGap(6, 6, 6)
+                        .addComponent(duedate, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(add, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(clear, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(75, 75, 75))
+        );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, 730));
 
@@ -223,6 +360,105 @@ public class AddProject extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_search2KeyReleased
 
+    private void exitMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMouseEntered
+        Color clr=new Color(255,255,255);
+        exit.setBackground(clr);
+    }//GEN-LAST:event_exitMouseEntered
+
+    private void exitMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMouseExited
+        Color clr=new Color(204, 0 , 0 );
+        exit.setBackground(clr);
+    }//GEN-LAST:event_exitMouseExited
+
+    private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
+        dispose();
+    }//GEN-LAST:event_exitActionPerformed
+
+    private void addMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMouseEntered
+        Color clr=new Color(0, 0, 255);
+        add.setBackground(clr);
+    }//GEN-LAST:event_addMouseEntered
+
+    private void addMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMouseExited
+        Color clr=new Color(255,255,255);
+        add.setBackground(clr);
+    }//GEN-LAST:event_addMouseExited
+
+    private void clearMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearMouseEntered
+        Color clr=new Color(0, 0, 255);
+        clear.setBackground(clr);
+    }//GEN-LAST:event_clearMouseEntered
+
+    private void clearMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearMouseExited
+        Color clr=new Color(255,255,255);
+        clear.setBackground(clr);
+    }//GEN-LAST:event_clearMouseExited
+
+    private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
+        try {
+            String employeeId = empid.getText();
+            String nameadd = name.getText();
+            String emailadd = email.getText();
+            String position = post.getText();
+            String department = dept.getText();                
+            Date assign = assigndate.getDate();
+            Date due = duedate.getDate();
+            String descript = description.getText();
+
+            if (employeeId.isEmpty() || nameadd.isEmpty() || emailadd.isEmpty() ||
+                    position.isEmpty() || department.isEmpty() || assign == null || due == null || descript.isEmpty()) {
+
+                JOptionPane.showMessageDialog(this, "Please fill in all fields", "Incomplete Information", JOptionPane.WARNING_MESSAGE);
+            } else {
+                String url = "jdbc:mysql://localhost/javadb";
+                String dbUsername = "root";
+                String dbPassword = "";
+
+                try (Connection con = DriverManager.getConnection(url, dbUsername, dbPassword)) {
+                    String insertQuery = "INSERT INTO project_db (employee_id, name, email, position, department, assigndate, duedate, proj_desc) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+                    try (PreparedStatement pst = con.prepareStatement(insertQuery)) {
+                        pst.setString(1, employeeId);
+                        pst.setString(2, nameadd);
+                        pst.setString(3, emailadd);
+                        pst.setString(4, position);
+                        pst.setString(5, department);
+
+                        java.sql.Date assigndates = new java.sql.Date(assign.getTime());
+                        java.sql.Date duedates = new java.sql.Date(due.getTime());
+
+                        pst.setDate(6, assigndates);
+                        pst.setDate(7, duedates);                       
+                        pst.setString(8, descript);
+
+                        int rowsAffected = pst.executeUpdate();
+
+                        if (rowsAffected > 0) {
+                            JOptionPane.showMessageDialog(this, "Project added successfully!");
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Failed to add project.");
+                        }
+                    }
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(this, "An error occurred. Please check console for details.");
+                    ex.printStackTrace(); // Print detailed error information
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }//GEN-LAST:event_addActionPerformed
+
+    private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
+        empid.setText(""); 
+        name.setText("");  
+        email.setText(""); 
+        post.setText("");           
+        dept.setText("");
+        description.setText("");
+    }//GEN-LAST:event_clearActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -259,11 +495,15 @@ public class AddProject extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton add;
     private com.toedter.calendar.JDateChooser assigndate;
+    private javax.swing.JButton clear;
     private javax.swing.JTextField dept;
+    private javax.swing.JTextArea description;
     private com.toedter.calendar.JDateChooser duedate;
     private javax.swing.JTextField email;
     private javax.swing.JTextField empid;
+    private javax.swing.JButton exit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
@@ -277,7 +517,6 @@ public class AddProject extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField name;
     private javax.swing.JTextField post;
     private javax.swing.JTextField search;
