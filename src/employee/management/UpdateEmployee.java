@@ -376,7 +376,7 @@ public class UpdateEmployee extends javax.swing.JFrame {
     }//GEN-LAST:event_add1MouseExited
 
     private void add1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add1ActionPerformed
-            try {
+        try {
             String emplo = empid.getText();
             String uname = name.getText();
             String uemail = email.getText();

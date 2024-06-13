@@ -61,6 +61,7 @@ public class Project extends javax.swing.JInternalFrame {
                     v.add(rs.getString("mark"));
                     v.add(rs.getString("status"));
                     v.add(rs.getString("proj_desc"));
+                    v.add(rs.getString("proj_msg"));
                     v.add(rs.getString("submitted"));
                     
                 }
@@ -226,16 +227,19 @@ public class Project extends javax.swing.JInternalFrame {
 
         projecttbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Number", "Employee ID", "Name", "Email", "Position", "Department", "Picture", "Asign Data", "Due date", "Mark", "Status", "Project Description", "Submitted Date"
+                "Number", "Employee ID", "Name", "Email", "Position", "Department", "Picture", "Asign Data", "Due date", "Mark", "Status", "Project Description", "Project Message", "Submitted Date"
             }
         ));
         jScrollPane1.setViewportView(projecttbl);
+        if (projecttbl.getColumnModel().getColumnCount() > 0) {
+            projecttbl.getColumnModel().getColumn(12).setResizable(false);
+        }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -347,31 +351,14 @@ public class Project extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton add;
-    private javax.swing.JButton delete;
-    private javax.swing.JButton delete1;
-    private javax.swing.JButton delete2;
     private javax.swing.JButton delete3;
-    private javax.swing.JTextField deltxt;
-    private javax.swing.JTextField deltxt1;
-    private javax.swing.JTextField deltxt2;
     private javax.swing.JTextField deltxt3;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable projecttbl;
     private javax.swing.JButton seeproj;
-    private javax.swing.JButton update;
-    private javax.swing.JButton update1;
-    private javax.swing.JButton update2;
-    private javax.swing.JButton update3;
     private javax.swing.JButton update4;
     // End of variables declaration//GEN-END:variables
 }
