@@ -39,7 +39,7 @@ public class UserAttendance extends javax.swing.JInternalFrame {
         showDate();
         showTime();
     }
-     void showDate() {
+    void showDate() {
         Date d = new Date();
         SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
         date.setText(s.format(d));

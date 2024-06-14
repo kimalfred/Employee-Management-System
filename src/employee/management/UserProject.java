@@ -5,6 +5,8 @@
 package employee.management;
 
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -16,12 +18,15 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
@@ -40,6 +45,24 @@ public class UserProject extends javax.swing.JInternalFrame {
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
         BasicInternalFrameUI ui=(BasicInternalFrameUI)this.getUI();
         ui.setNorthPane(null);
+        showDate();
+        showTime();
+    }
+    void showDate() {
+        Date d = new Date();
+        SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
+        date.setText(s.format(d));
+    }
+    void showTime() {
+        new Timer(0, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Date d = new Date();
+                SimpleDateFormat s = new SimpleDateFormat("HH:mm:ss");
+                time.setText(s.format(d));
+            }
+        }
+        ).start();
     }
 
     /**
@@ -54,6 +77,8 @@ public class UserProject extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         search2 = new javax.swing.JTextField();
+        date = new javax.swing.JLabel();
+        time = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         empid = new javax.swing.JTextField();
         name = new javax.swing.JTextField();
@@ -99,21 +124,38 @@ public class UserProject extends javax.swing.JInternalFrame {
             }
         });
 
+        date.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        date.setForeground(new java.awt.Color(255, 255, 255));
+        date.setText("Date");
+
+        time.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        time.setForeground(new java.awt.Color(255, 255, 255));
+        time.setText("Time");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(6, 6, 6)
                 .addComponent(search2, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(date, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(time, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(88, 88, 88))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(search2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(search2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(time)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(date)
+                .addContainerGap())
         );
 
         jPanel3.setBackground(new java.awt.Color(51, 51, 51));
@@ -334,7 +376,7 @@ public class UserProject extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(due, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(76, 76, 76))
         );
@@ -424,13 +466,14 @@ public class UserProject extends javax.swing.JInternalFrame {
             String marks = (String) mark.getSelectedItem();
             String desc = descript.getText();
             String msg = message.getText();
+            String datesub = date.getText();
 
             String url = "jdbc:mysql://localhost/javadb";
             String dbUsername = "root";
             String dbPassword = "";
 
             try (Connection con = DriverManager.getConnection(url, dbUsername, dbPassword)) {
-                String updateQuery = "UPDATE project_db SET name = ?, email = ?, position = ?, department = ?, picture = ?, assigndate = ?, duedate = ?, mark = ?, proj_desc = ?, proj_msg = ? WHERE employee_id = ?";
+                String updateQuery = "UPDATE project_db SET name = ?, email = ?, position = ?, department = ?, picture = ?, assigndate = ?, duedate = ?, mark = ?, proj_desc = ?, proj_msg = ?, submitted = ? WHERE employee_id = ?";
 
                 try (PreparedStatement pst = con.prepareStatement(updateQuery)) {
                         pst.setString(1, uname);
@@ -446,7 +489,8 @@ public class UserProject extends javax.swing.JInternalFrame {
                         pst.setString(8, marks);
                         pst.setString(9, desc);
                         pst.setString(10, msg);
-                        pst.setString(11, emplo);
+                        pst.setString(11, datesub);
+                        pst.setString(12, emplo);
 
                     int rowsAffected = pst.executeUpdate();
 
@@ -485,6 +529,7 @@ public class UserProject extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField assign;
+    private javax.swing.JLabel date;
     private javax.swing.JTextField dept;
     private javax.swing.JTextArea descript;
     private javax.swing.JTextField due;
@@ -512,5 +557,6 @@ public class UserProject extends javax.swing.JInternalFrame {
     private javax.swing.JTextField name;
     private javax.swing.JTextField post;
     public static javax.swing.JTextField search2;
+    private javax.swing.JLabel time;
     // End of variables declaration//GEN-END:variables
 }
