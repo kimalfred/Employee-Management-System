@@ -72,7 +72,7 @@ import javax.mail.Transport;
 
 //For button on your GUI and your own logic
 String ToEmail = txtToEmail.getText();
-String FromEmail = txtFromEmail.getText(); // Your email address
+String FromEmail = txtFromEmail.getText();
 String FromEmailPassword = "__"; // Your App Password
 String Subject = txtSubject.getText();
 String MessageText = txtMessage.getText(); 
