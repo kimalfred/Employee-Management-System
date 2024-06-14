@@ -369,9 +369,10 @@ public class UserPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
-        UserProject home=new UserProject();
+        UserProject home = new UserProject();
         user.removeAll();
         user.add(home).setVisible(true);
+        home.search2.setText(email.getText());
     }//GEN-LAST:event_jLabel6MouseClicked
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked

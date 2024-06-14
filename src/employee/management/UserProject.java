@@ -121,30 +121,37 @@ public class UserProject extends javax.swing.JInternalFrame {
         empid.setBackground(new java.awt.Color(255, 255, 255));
         empid.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         empid.setForeground(new java.awt.Color(0, 0, 0));
+        empid.setEnabled(false);
 
         name.setBackground(new java.awt.Color(255, 255, 255));
         name.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         name.setForeground(new java.awt.Color(0, 0, 0));
+        name.setEnabled(false);
 
         post.setBackground(new java.awt.Color(255, 255, 255));
         post.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         post.setForeground(new java.awt.Color(0, 0, 0));
+        post.setEnabled(false);
 
         email.setBackground(new java.awt.Color(255, 255, 255));
         email.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         email.setForeground(new java.awt.Color(0, 0, 0));
+        email.setEnabled(false);
 
         assign.setBackground(new java.awt.Color(255, 255, 255));
         assign.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         assign.setForeground(new java.awt.Color(0, 0, 0));
+        assign.setEnabled(false);
 
         due.setBackground(new java.awt.Color(255, 255, 255));
         due.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         due.setForeground(new java.awt.Color(0, 0, 0));
+        due.setEnabled(false);
 
         dept.setBackground(new java.awt.Color(255, 255, 255));
         dept.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         dept.setForeground(new java.awt.Color(0, 0, 0));
+        dept.setEnabled(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -207,9 +214,10 @@ public class UserProject extends javax.swing.JInternalFrame {
 
         descript.setBackground(new java.awt.Color(255, 255, 255));
         descript.setColumns(20);
-        descript.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        descript.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         descript.setForeground(new java.awt.Color(0, 0, 0));
         descript.setRows(5);
+        descript.setEnabled(false);
         jScrollPane1.setViewportView(descript);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -395,6 +403,9 @@ public class UserProject extends javax.swing.JInternalFrame {
                 
                 String setDue = rs.getString("duedate");
                 due.setText(setDue);
+                
+                String setDescription = rs.getString("proj_desc");
+                descript.setText(setDescription);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -425,17 +436,17 @@ public class UserProject extends javax.swing.JInternalFrame {
                         pst.setString(1, uname);
                         pst.setString(2, uemail);
                         pst.setString(3, position);
-                        pst.setString(4, position);
-                        pst.setString(5, department);
+                        pst.setString(4, department);
                         
                         InputStream is = new FileInputStream(new File(path2));                      
-                        pst.setBlob(6, is);
+                        pst.setBlob(5, is);
                         //pst.execute();
-                        pst.setString(7, assigndate);
-                        pst.setString(8, duedate);
-                        pst.setString(9, marks);
-                        pst.setString(10, desc);
-                        pst.setString(11, msg);
+                        pst.setString(6, assigndate);
+                        pst.setString(7, duedate);
+                        pst.setString(8, marks);
+                        pst.setString(9, desc);
+                        pst.setString(10, msg);
+                        pst.setString(11, emplo);
 
                     int rowsAffected = pst.executeUpdate();
 
@@ -500,6 +511,6 @@ public class UserProject extends javax.swing.JInternalFrame {
     private javax.swing.JTextArea message;
     private javax.swing.JTextField name;
     private javax.swing.JTextField post;
-    private javax.swing.JTextField search2;
+    public static javax.swing.JTextField search2;
     // End of variables declaration//GEN-END:variables
 }
