@@ -105,7 +105,7 @@ public class Project extends javax.swing.JInternalFrame {
 
         update4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         update4.setForeground(new java.awt.Color(0, 0, 0));
-        update4.setText("Update Project");
+        update4.setText("Check Project");
         update4.setActionCommand("Update Leave");
         update4.setBorder(new javax.swing.border.MatteBorder(null));
         update4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -154,7 +154,7 @@ public class Project extends javax.swing.JInternalFrame {
 
         add.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         add.setForeground(new java.awt.Color(0, 0, 0));
-        add.setText("Add Project");
+        add.setText("Assign Project");
         add.setActionCommand("Update Leave");
         add.setBorder(new javax.swing.border.MatteBorder(null));
         add.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -173,7 +173,8 @@ public class Project extends javax.swing.JInternalFrame {
 
         seeproj.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         seeproj.setForeground(new java.awt.Color(0, 0, 0));
-        seeproj.setText("See Project");
+        seeproj.setText("Projects");
+        seeproj.setToolTipText("");
         seeproj.setActionCommand("Update Leave");
         seeproj.setBorder(new javax.swing.border.MatteBorder(null));
         seeproj.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -278,7 +279,8 @@ public class Project extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_update4MouseExited
 
     private void update4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update4ActionPerformed
-      
+        CheckProject a = new CheckProject();
+        a.setVisible(true);
     }//GEN-LAST:event_update4ActionPerformed
 
     private void delete3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_delete3MouseEntered
@@ -334,19 +336,19 @@ public class Project extends javax.swing.JInternalFrame {
         a.setVisible(true);
     }//GEN-LAST:event_addActionPerformed
 
-    private void seeprojMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_seeprojMouseEntered
-        Color clr=new Color(0, 0, 255);
-        seeproj.setBackground(clr);
-    }//GEN-LAST:event_seeprojMouseEntered
+    private void seeprojActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seeprojActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_seeprojActionPerformed
 
     private void seeprojMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_seeprojMouseExited
         Color clr=new Color(255,255,255);
         seeproj.setBackground(clr);
     }//GEN-LAST:event_seeprojMouseExited
 
-    private void seeprojActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seeprojActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_seeprojActionPerformed
+    private void seeprojMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_seeprojMouseEntered
+        Color clr=new Color(0, 0, 255);
+        seeproj.setBackground(clr);
+    }//GEN-LAST:event_seeprojMouseEntered
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
