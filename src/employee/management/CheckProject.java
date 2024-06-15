@@ -178,7 +178,6 @@ public class CheckProject extends javax.swing.JFrame {
         descript.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         descript.setForeground(new java.awt.Color(0, 0, 0));
         descript.setRows(5);
-        descript.setEnabled(false);
         jScrollPane1.setViewportView(descript);
 
         jScrollPane3.setPreferredSize(new java.awt.Dimension(234, 179));
@@ -485,7 +484,14 @@ public class CheckProject extends javax.swing.JFrame {
             String dbPassword = "";
 
             try (Connection con = DriverManager.getConnection(url, dbUsername, dbPassword)) {
-                String updateQuery = "UPDATE project_db SET name = ?, email = ?, position = ?, department = ?, picture = ?, assigndate = ?, duedate = ?, proj_desc = ?, proj_msg = ?, submitted = ?, mark = ?, status = ? WHERE employee_id = ?";
+                String updateQuery;
+                boolean updatePicture = path2 != null && !path2.isEmpty();
+
+                if (updatePicture) {
+                    updateQuery = "UPDATE project_db SET name = ?, email = ?, position = ?, department = ?, picture = ?, assigndate = ?, duedate = ?, proj_desc = ?, proj_msg = ?, submitted = ?, mark = ?, status = ? WHERE employee_id = ?";
+                } else {
+                    updateQuery = "UPDATE project_db SET name = ?, email = ?, position = ?, department = ?, assigndate = ?, duedate = ?, proj_desc = ?, proj_msg = ?, submitted = ?, mark = ?, status = ? WHERE employee_id = ?";
+                }
 
                 try (PreparedStatement pst = con.prepareStatement(updateQuery)) {
                     pst.setString(1, uname);
@@ -493,11 +499,13 @@ public class CheckProject extends javax.swing.JFrame {
                     pst.setString(3, position);
                     pst.setString(4, department);
 
-                    if (path2 != null && !path2.isEmpty()) {
+                    int parameterIndex = 5;
+
+                    if (updatePicture) {
                         File pictureFile = new File(path2);
                         if (pictureFile.exists() && pictureFile.isFile()) {
                             try (InputStream is = new FileInputStream(pictureFile)) {
-                                pst.setBlob(5, is);
+                                pst.setBlob(parameterIndex++, is);
                             } catch (FileNotFoundException ex) {
                                 Logger.getLogger(UserProject.class.getName()).log(Level.SEVERE, null, ex);
                                 JOptionPane.showMessageDialog(this, "Picture file not found.");
@@ -507,22 +515,21 @@ public class CheckProject extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(this, "Invalid picture file path.");
                             return;
                         }
-                    } else {
-                        pst.setNull(5, java.sql.Types.BLOB);
                     }
-                    pst.setString(6, assigndate);
-                    pst.setString(7, duedate);
-                    pst.setString(8, desc);
-                    pst.setString(9, msg);
-                    pst.setString(10, datesub);
-                    pst.setString(11, marks);
-                    pst.setString(12, stat);
-                    pst.setString(13, emplo);
+
+                    pst.setString(parameterIndex++, assigndate);
+                    pst.setString(parameterIndex++, duedate);
+                    pst.setString(parameterIndex++, desc);
+                    pst.setString(parameterIndex++, msg);
+                    pst.setString(parameterIndex++, datesub);
+                    pst.setString(parameterIndex++, marks);
+                    pst.setString(parameterIndex++, stat);
+                    pst.setString(parameterIndex++, emplo);
 
                     int rowsAffected = pst.executeUpdate();
 
                     if (rowsAffected > 0) {
-                        JOptionPane.showMessageDialog(this, "Added Record Successfully!");
+                        JOptionPane.showMessageDialog(this, "Updated Record Successfully!");
                     } else {
                         JOptionPane.showMessageDialog(this, "No records updated. Employee ID not found.");
                     }
@@ -538,6 +545,7 @@ public class CheckProject extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "An unexpected error occurred. Please check the console for details.");
             ex.printStackTrace();
         }
+
     }//GEN-LAST:event_updateActionPerformed
 
     /**
