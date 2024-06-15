@@ -4,6 +4,7 @@
  */
 package employee.management;
 
+import static employee.management.LeaveApp.label;
 import java.awt.Color;
 import java.awt.Image;
 import java.io.File;
@@ -48,7 +49,7 @@ public class CheckProject extends javax.swing.JFrame {
 
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        project = new javax.swing.JLabel();
         exit1 = new javax.swing.JButton();
         search = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
@@ -84,8 +85,8 @@ public class CheckProject extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(102, 102, 102));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel2.setText("Project Submitted");
+        project.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        project.setText("Project Submitted");
 
         exit1.setBackground(new java.awt.Color(204, 0, 0));
         exit1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -111,7 +112,7 @@ public class CheckProject extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(300, 300, 300)
-                .addComponent(jLabel2)
+                .addComponent(project)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(exit1))
         );
@@ -119,7 +120,7 @@ public class CheckProject extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jLabel2)
+                .addComponent(project)
                 .addContainerGap(21, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(exit1)
@@ -545,7 +546,10 @@ public class CheckProject extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "An unexpected error occurred. Please check the console for details.");
             ex.printStackTrace();
         }
-
+        Email x = new Email();
+        x.setVisible(true);
+        x.txtSubject.setText(project.getText());
+        dispose(); 
     }//GEN-LAST:event_updateActionPerformed
 
     /**
@@ -597,7 +601,6 @@ public class CheckProject extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -612,6 +615,7 @@ public class CheckProject extends javax.swing.JFrame {
     private javax.swing.JTextArea message;
     private javax.swing.JTextField name;
     private javax.swing.JTextField post;
+    private javax.swing.JLabel project;
     private javax.swing.JTextField search;
     private javax.swing.JComboBox<String> status;
     private javax.swing.JTextField submit;

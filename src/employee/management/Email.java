@@ -49,7 +49,6 @@ public class Email extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtMessage = new javax.swing.JTextArea();
         send = new javax.swing.JButton();
-        back = new javax.swing.JButton();
         exit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -95,7 +94,6 @@ public class Email extends javax.swing.JFrame {
         txtMessage.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtMessage.setForeground(new java.awt.Color(0, 0, 0));
         txtMessage.setRows(5);
-        txtMessage.setText("Your Employee Leave is ");
         jScrollPane1.setViewportView(txtMessage);
 
         send.setBackground(new java.awt.Color(255, 255, 255));
@@ -113,24 +111,6 @@ public class Email extends javax.swing.JFrame {
         send.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sendActionPerformed(evt);
-            }
-        });
-
-        back.setBackground(new java.awt.Color(0, 255, 0));
-        back.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        back.setForeground(new java.awt.Color(0, 0, 0));
-        back.setText("Back");
-        back.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                backMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                backMouseExited(evt);
-            }
-        });
-        back.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backActionPerformed(evt);
             }
         });
 
@@ -159,9 +139,7 @@ public class Email extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(back)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(exit))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,9 +169,7 @@ public class Email extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(exit, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(exit, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
                 .addComponent(jLabel1)
                 .addGap(41, 41, 41)
@@ -262,12 +238,6 @@ public class Email extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_exitActionPerformed
 
-    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
-        LeaveApp x = new LeaveApp();
-        x.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_backActionPerformed
-
     private void sendMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sendMouseEntered
         Color clr=new Color(0, 255, 0);
         send.setBackground(clr);
@@ -277,16 +247,6 @@ public class Email extends javax.swing.JFrame {
         Color clr=new Color(255, 255, 255);
         send.setBackground(clr);
     }//GEN-LAST:event_sendMouseExited
-
-    private void backMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backMouseEntered
-        Color clr=new Color(255,255,255);
-        back.setBackground(clr);
-    }//GEN-LAST:event_backMouseEntered
-
-    private void backMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backMouseExited
-        Color clr=new Color(0, 255, 0);
-        back.setBackground(clr);
-    }//GEN-LAST:event_backMouseExited
 
     private void exitMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMouseEntered
         Color clr=new Color(255,255,255);
@@ -334,7 +294,6 @@ public class Email extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton back;
     private javax.swing.JButton exit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
