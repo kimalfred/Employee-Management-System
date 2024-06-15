@@ -6,11 +6,18 @@ package employee.management;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -24,6 +31,7 @@ public class CheckProject extends javax.swing.JFrame {
     Connection con = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
+    String path2 = null;
     
     public CheckProject() {
         initComponents();
@@ -65,10 +73,11 @@ public class CheckProject extends javax.swing.JFrame {
         imagetxt = new javax.swing.JLabel();
         submit = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        mark = new javax.swing.JComboBox<>();
+        status = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
+        update = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -220,21 +229,39 @@ public class CheckProject extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel13.setText("Submitted");
 
-        jComboBox1.setBackground(new java.awt.Color(255, 255, 255));
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(0, 0, 0));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Excellent", "Very Good", "Good", "Fair", "Poor" }));
+        mark.setBackground(new java.awt.Color(255, 255, 255));
+        mark.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        mark.setForeground(new java.awt.Color(0, 0, 0));
+        mark.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Excellent", "Very Good", "Good", "Fair", "Poor" }));
 
-        jComboBox2.setBackground(new java.awt.Color(255, 255, 255));
-        jComboBox2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jComboBox2.setForeground(new java.awt.Color(0, 0, 0));
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Submitted", "Rejected" }));
+        status.setBackground(new java.awt.Color(255, 255, 255));
+        status.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        status.setForeground(new java.awt.Color(0, 0, 0));
+        status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Approved", "Rejected" }));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel14.setText("Mark");
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel15.setText("Status");
+
+        update.setBackground(new java.awt.Color(255, 255, 255));
+        update.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        update.setForeground(new java.awt.Color(0, 0, 0));
+        update.setText("Update Project");
+        update.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                updateMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                updateMouseExited(evt);
+            }
+        });
+        update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -270,14 +297,14 @@ public class CheckProject extends javax.swing.JFrame {
                             .addComponent(jLabel9))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(submit, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel13)
-                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jComboBox2, 0, 200, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(submit, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel13)
+                                .addComponent(mark, 0, 200, Short.MAX_VALUE)
+                                .addComponent(status, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel14)
-                                .addComponent(jLabel15))
+                                .addComponent(jLabel15)
+                                .addComponent(update, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(imagetxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(75, 75, 75)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -295,7 +322,6 @@ public class CheckProject extends javax.swing.JFrame {
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -336,21 +362,23 @@ public class CheckProject extends javax.swing.JFrame {
                             .addComponent(jLabel14))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-                            .addComponent(assign))
+                            .addComponent(assign, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                            .addComponent(mark))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
                             .addComponent(jLabel15))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(due, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox2)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(due, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                            .addComponent(status)))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addComponent(update, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41))
         );
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, -1));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, 730));
 
         pack();
         setLocationRelativeTo(null);
@@ -358,55 +386,55 @@ public class CheckProject extends javax.swing.JFrame {
 
     private void searchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchKeyReleased
         try {
-        String query = "SELECT * FROM project_db WHERE employee_id = ?";
-        con = DriverManager.getConnection("jdbc:mysql://localhost/javadb", "root", "");
+            String query = "SELECT * FROM project_db WHERE employee_id = ?";
+            con = DriverManager.getConnection("jdbc:mysql://localhost/javadb", "root", "");
 
-        String sql = query;
-        PreparedStatement pst = con.prepareStatement(sql);
-        pst.setString(1, search.getText());
+            String sql = query;
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1, search.getText());
 
-        ResultSet rs = pst.executeQuery();
-        if (rs.next()) {
-            String setname = rs.getString("name");
-            name.setText(setname);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                String setname = rs.getString("name");
+                name.setText(setname);
 
-            String setemail = rs.getString("email");
-            email.setText(setemail);
+                String setemail = rs.getString("email");
+                email.setText(setemail);
 
-            String setPosition = rs.getString("position");
-            post.setText(setPosition);
+                String setPosition = rs.getString("position");
+                post.setText(setPosition);
 
-            String setDepartment = rs.getString("department");
-            dept.setText(setDepartment);
+                String setDepartment = rs.getString("department");
+                dept.setText(setDepartment);
 
-            Blob blob = rs.getBlob("picture");
-            if (blob != null) {
-                byte[] imageBytes = blob.getBytes(1, (int) blob.length());
-                ImageIcon imageIcon = new ImageIcon(imageBytes);
-                Image image = imageIcon.getImage();
-                Image newImg = image.getScaledInstance(200, 200,  java.awt.Image.SCALE_SMOOTH);
-                imageIcon = new ImageIcon(newImg);
-                imagetxt.setIcon(imageIcon);
+                Blob blob = rs.getBlob("picture");
+                if (blob != null) {
+                    byte[] imageBytes = blob.getBytes(1, (int) blob.length());
+                    ImageIcon imageIcon = new ImageIcon(imageBytes);
+                    Image image = imageIcon.getImage();
+                    Image newImg = image.getScaledInstance(200, 200,  java.awt.Image.SCALE_SMOOTH);
+                    imageIcon = new ImageIcon(newImg);
+                    imagetxt.setIcon(imageIcon);
+                }
+
+                String setAssign = rs.getString("assigndate");
+                assign.setText(setAssign);
+
+                String setDue = rs.getString("duedate");
+                due.setText(setDue);
+
+                String setSubmit = rs.getString("submitted");
+                submit.setText(setSubmit);
+
+                String setDescript = rs.getString("proj_desc");
+                descript.setText(setDescript);
+
+                String setMessage = rs.getString("proj_msg");
+                message.setText(setMessage);
             }
-
-            String setAssign = rs.getString("assigndate");
-            assign.setText(setAssign);
-
-            String setDue = rs.getString("duedate");
-            due.setText(setDue);
-            
-            String setSubmit = rs.getString("submitted");
-            submit.setText(setSubmit);
-
-            String setDescript = rs.getString("proj_desc");
-            descript.setText(setDescript);
-
-            String setMessage = rs.getString("proj_msg");
-            message.setText(setMessage);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
         }
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, e);
-    }
     }//GEN-LAST:event_searchKeyReleased
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
@@ -426,6 +454,91 @@ public class CheckProject extends javax.swing.JFrame {
         Color clr=new Color(255,255,255);
         exit1.setBackground(clr);
     }//GEN-LAST:event_exit1MouseEntered
+
+    private void updateMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateMouseEntered
+        Color clr=new Color(0,0,255);
+        update.setBackground(clr);
+    }//GEN-LAST:event_updateMouseEntered
+
+    private void updateMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateMouseExited
+        Color clr=new Color(255,255,255);
+        update.setBackground(clr);
+    }//GEN-LAST:event_updateMouseExited
+
+    private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
+        try {
+            String emplo = search.getText();
+            String uname = name.getText();
+            String uemail = email.getText();
+            String position = post.getText();
+            String department = dept.getText();
+            String assigndate = assign.getText();
+            String duedate = due.getText();
+            String desc = descript.getText();
+            String msg = message.getText();
+            String datesub = submit.getText();
+            String marks = (String) mark.getSelectedItem();
+            String stat = (String) status.getSelectedItem();
+
+            String url = "jdbc:mysql://localhost/javadb";
+            String dbUsername = "root";
+            String dbPassword = "";
+
+            try (Connection con = DriverManager.getConnection(url, dbUsername, dbPassword)) {
+                String updateQuery = "UPDATE project_db SET name = ?, email = ?, position = ?, department = ?, picture = ?, assigndate = ?, duedate = ?, proj_desc = ?, proj_msg = ?, submitted = ?, mark = ?, status = ? WHERE employee_id = ?";
+
+                try (PreparedStatement pst = con.prepareStatement(updateQuery)) {
+                    pst.setString(1, uname);
+                    pst.setString(2, uemail);
+                    pst.setString(3, position);
+                    pst.setString(4, department);
+
+                    if (path2 != null && !path2.isEmpty()) {
+                        File pictureFile = new File(path2);
+                        if (pictureFile.exists() && pictureFile.isFile()) {
+                            try (InputStream is = new FileInputStream(pictureFile)) {
+                                pst.setBlob(5, is);
+                            } catch (FileNotFoundException ex) {
+                                Logger.getLogger(UserProject.class.getName()).log(Level.SEVERE, null, ex);
+                                JOptionPane.showMessageDialog(this, "Picture file not found.");
+                                return;
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Invalid picture file path.");
+                            return;
+                        }
+                    } else {
+                        pst.setNull(5, java.sql.Types.BLOB);
+                    }
+                    pst.setString(6, assigndate);
+                    pst.setString(7, duedate);
+                    pst.setString(8, desc);
+                    pst.setString(9, msg);
+                    pst.setString(10, datesub);
+                    pst.setString(11, marks);
+                    pst.setString(12, stat);
+                    pst.setString(13, emplo);
+
+                    int rowsAffected = pst.executeUpdate();
+
+                    if (rowsAffected > 0) {
+                        JOptionPane.showMessageDialog(this, "Added Record Successfully!");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "No records updated. Employee ID not found.");
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserProject.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(this, "An error occurred while updating the record.");
+                }
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, "An error occurred. Please check the console for details.");
+                ex.printStackTrace();
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "An unexpected error occurred. Please check the console for details.");
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_updateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -468,12 +581,8 @@ public class CheckProject extends javax.swing.JFrame {
     private javax.swing.JTextArea descript;
     private javax.swing.JTextField due;
     private javax.swing.JTextField email;
-    private javax.swing.JButton exit;
     private javax.swing.JButton exit1;
     private javax.swing.JLabel imagetxt;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -487,15 +596,17 @@ public class CheckProject extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JComboBox<String> mark;
     private javax.swing.JTextArea message;
     private javax.swing.JTextField name;
     private javax.swing.JTextField post;
     private javax.swing.JTextField search;
+    private javax.swing.JComboBox<String> status;
     private javax.swing.JTextField submit;
+    private javax.swing.JButton update;
     // End of variables declaration//GEN-END:variables
 }
