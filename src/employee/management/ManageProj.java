@@ -204,6 +204,7 @@ public class ManageProj extends javax.swing.JInternalFrame {
         descript.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         descript.setForeground(new java.awt.Color(0, 0, 0));
         descript.setRows(5);
+        descript.setEnabled(false);
         jScrollPane1.setViewportView(descript);
 
         message.setBackground(new java.awt.Color(255, 255, 255));

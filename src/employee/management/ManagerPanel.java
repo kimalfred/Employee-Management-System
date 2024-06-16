@@ -675,6 +675,7 @@ public class ManagerPanel extends javax.swing.JFrame {
         ManageProj proj=new ManageProj();
         manage.removeAll();
         manage.add(proj).setVisible(true);
+        proj.search2.setText(email.getText());
     }//GEN-LAST:event_jLabel11MouseClicked
 
     private void jLabel11MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MousePressed
