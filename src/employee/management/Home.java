@@ -4,7 +4,14 @@
  */
 package employee.management;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridLayout;
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
@@ -13,16 +20,58 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  */
 public class Home extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form Home
-     */
+    private JLabel employeeCountLabel;
+    //private JLabel departmentCountLabel;
+    private JLabel projectCountLabel;
+    private JLabel requestCountLabel;
+    
     public Home() {
         initComponents();
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
         BasicInternalFrameUI ui=(BasicInternalFrameUI)this.getUI();
         ui.setNorthPane(null);
         
+        initializeDashboard();
+        updateCounts();
     }
+    private void initializeDashboard() {
+        employeeCountLabel = new JLabel("Loading...", SwingConstants.CENTER);
+        //departmentCountLabel = new JLabel("Loading...", SwingConstants.CENTER);
+        projectCountLabel = new JLabel("Loading...", SwingConstants.CENTER);
+        requestCountLabel = new JLabel("Loading...", SwingConstants.CENTER);
+
+        addLabelToPanel(emp_data, "Employees", employeeCountLabel);
+        //addLabelToPanel(dept_data, "No. Of Department", departmentCountLabel);
+        addLabelToPanel(proj_data, "Projects Assign", projectCountLabel);
+        addLabelToPanel(sick_data, "Leave Request", requestCountLabel);
+    }
+
+    private void addLabelToPanel(JPanel panel, String title, JLabel label) {
+        panel.setLayout(new BorderLayout());
+
+        JLabel titleLabel = new JLabel(title, SwingConstants.CENTER);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 16));
+
+        label.setFont(new Font("Arial", Font.PLAIN, 24));
+
+        panel.add(titleLabel, BorderLayout.NORTH);
+        panel.add(label, BorderLayout.CENTER);
+    }
+
+    private void updateCounts() {
+        DatabaseHelper dbHelper = new DatabaseHelper();
+
+        int employeeCount = dbHelper.getCount("emptb");
+        //int departmentCount = dbHelper.getCount("departments");
+        int projectCount = dbHelper.getCount("project_db");
+        int requestCount = dbHelper.getCount("emp_leave");
+
+        employeeCountLabel.setText(String.valueOf(employeeCount));
+        //departmentCountLabel.setText(String.valueOf(departmentCount));
+        projectCountLabel.setText(String.valueOf(projectCount));
+        requestCountLabel.setText(String.valueOf(requestCount));
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -38,22 +87,22 @@ public class Home extends javax.swing.JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        empstat = new javax.swing.JLabel();
+        emp_data = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        deptstat = new javax.swing.JLabel();
+        dept_data = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        projstat = new javax.swing.JLabel();
+        proj_data = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        reqstat = new javax.swing.JLabel();
+        sick_data = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         add = new javax.swing.JPanel();
         emp = new javax.swing.JLabel();
@@ -91,12 +140,22 @@ public class Home extends javax.swing.JInternalFrame {
         );
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel2.setText("No. Of Employee");
+        jLabel2.setText("No. of Employee");
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/employee/management/emp.png"))); // NOI18N
 
-        empstat.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        empstat.setText("Number");
+        emp_data.setBackground(new java.awt.Color(102, 102, 102));
+
+        javax.swing.GroupLayout emp_dataLayout = new javax.swing.GroupLayout(emp_data);
+        emp_data.setLayout(emp_dataLayout);
+        emp_dataLayout.setHorizontalGroup(
+            emp_dataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        emp_dataLayout.setVerticalGroup(
+            emp_dataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -105,26 +164,24 @@ public class Home extends javax.swing.JInternalFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(empstat)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
-                .addComponent(jLabel5)
-                .addGap(16, 16, 16))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(emp_data, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 20, Short.MAX_VALUE)
+                .addGap(0, 15, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(empstat)
-                        .addGap(24, 24, 24)))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(emp_data, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -151,12 +208,22 @@ public class Home extends javax.swing.JInternalFrame {
         );
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel3.setText("No. Of Department");
+        jLabel3.setText("No. of Department");
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/employee/management/dept.png"))); // NOI18N
 
-        deptstat.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        deptstat.setText("Number");
+        dept_data.setBackground(new java.awt.Color(102, 102, 102));
+
+        javax.swing.GroupLayout dept_dataLayout = new javax.swing.GroupLayout(dept_data);
+        dept_data.setLayout(dept_dataLayout);
+        dept_dataLayout.setHorizontalGroup(
+            dept_dataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 156, Short.MAX_VALUE)
+        );
+        dept_dataLayout.setVerticalGroup(
+            dept_dataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -165,26 +232,24 @@ public class Home extends javax.swing.JInternalFrame {
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(deptstat)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
-                .addComponent(jLabel6)
-                .addGap(15, 15, 15))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(dept_data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                        .addComponent(jLabel6)))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 20, Short.MAX_VALUE)
+                .addGap(0, 15, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(deptstat)
-                        .addGap(25, 25, 25)))
+                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(dept_data, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -211,12 +276,22 @@ public class Home extends javax.swing.JInternalFrame {
         );
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel4.setText("No. Of Projects");
+        jLabel4.setText("No. of Projects");
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/employee/management/proj2.png"))); // NOI18N
 
-        projstat.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        projstat.setText("Number");
+        proj_data.setBackground(new java.awt.Color(102, 102, 102));
+
+        javax.swing.GroupLayout proj_dataLayout = new javax.swing.GroupLayout(proj_data);
+        proj_data.setLayout(proj_dataLayout);
+        proj_dataLayout.setHorizontalGroup(
+            proj_dataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        proj_dataLayout.setVerticalGroup(
+            proj_dataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -225,13 +300,14 @@ public class Home extends javax.swing.JInternalFrame {
             .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(projstat)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel7)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(proj_data, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel7)))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -243,9 +319,9 @@ public class Home extends javax.swing.JInternalFrame {
                         .addComponent(jLabel7)
                         .addGap(27, 27, 27))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(projstat)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                        .addContainerGap(15, Short.MAX_VALUE)
+                        .addComponent(proj_data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -272,12 +348,22 @@ public class Home extends javax.swing.JInternalFrame {
         );
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel11.setText("No. Of Request");
+        jLabel11.setText("No. of Request");
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/employee/management/sick.png"))); // NOI18N
 
-        reqstat.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        reqstat.setText("Number");
+        sick_data.setBackground(new java.awt.Color(102, 102, 102));
+
+        javax.swing.GroupLayout sick_dataLayout = new javax.swing.GroupLayout(sick_data);
+        sick_data.setLayout(sick_dataLayout);
+        sick_dataLayout.setHorizontalGroup(
+            sick_dataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        sick_dataLayout.setVerticalGroup(
+            sick_dataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -286,26 +372,24 @@ public class Home extends javax.swing.JInternalFrame {
             .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel11)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(reqstat)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
-                .addComponent(jLabel12)
-                .addGap(16, 16, 16))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addGap(0, 122, Short.MAX_VALUE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(sick_data, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(16, 16, 16)
+                        .addComponent(jLabel12)))
+                .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addGap(0, 22, Short.MAX_VALUE)
+                .addGap(0, 15, Short.MAX_VALUE)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                        .addComponent(reqstat)
-                        .addGap(24, 24, 24)))
+                    .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(sick_data, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -339,7 +423,7 @@ public class Home extends javax.swing.JInternalFrame {
             .addGroup(addLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(emp)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         addLayout.setVerticalGroup(
             addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -541,7 +625,7 @@ public class Home extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -635,9 +719,9 @@ public class Home extends javax.swing.JInternalFrame {
     private javax.swing.JPanel add4;
     private javax.swing.JLabel dept;
     private javax.swing.JLabel dept1;
-    private javax.swing.JLabel deptstat;
+    public static javax.swing.JPanel dept_data;
     private javax.swing.JLabel emp;
-    private javax.swing.JLabel empstat;
+    public static javax.swing.JPanel emp_data;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -660,7 +744,7 @@ public class Home extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JLabel proj;
-    private javax.swing.JLabel projstat;
-    private javax.swing.JLabel reqstat;
+    public static javax.swing.JPanel proj_data;
+    public static javax.swing.JPanel sick_data;
     // End of variables declaration//GEN-END:variables
 }

@@ -44,7 +44,7 @@ public class AdminPanel extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Date d = new Date();
-                SimpleDateFormat s = new SimpleDateFormat("HH:mm:ss a ");
+                SimpleDateFormat s = new SimpleDateFormat("HH:mm:ss a");
                 time.setText(s.format(d));
             }
         }
