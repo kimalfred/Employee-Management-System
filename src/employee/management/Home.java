@@ -63,6 +63,9 @@ public class Home extends javax.swing.JInternalFrame {
         jPanel11 = new javax.swing.JPanel();
         add2 = new javax.swing.JPanel();
         dept = new javax.swing.JLabel();
+        jPanel12 = new javax.swing.JPanel();
+        add4 = new javax.swing.JPanel();
+        dept1 = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 0, 0));
@@ -167,7 +170,7 @@ public class Home extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(deptstat)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addGap(15, 15, 15))
         );
@@ -311,13 +314,16 @@ public class Home extends javax.swing.JInternalFrame {
         jPanel9.setBackground(new java.awt.Color(102, 102, 102));
         jPanel9.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(255, 255, 0)));
 
-        add.setBackground(new java.awt.Color(51, 0, 0));
+        add.setBackground(new java.awt.Color(102, 0, 0));
         add.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         emp.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         emp.setForeground(new java.awt.Color(255, 255, 51));
         emp.setText("Add Employee");
         emp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                empMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 empMouseEntered(evt);
             }
@@ -359,13 +365,16 @@ public class Home extends javax.swing.JInternalFrame {
         jPanel10.setBackground(new java.awt.Color(102, 102, 102));
         jPanel10.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(255, 255, 0)));
 
-        add3.setBackground(new java.awt.Color(51, 0, 0));
+        add3.setBackground(new java.awt.Color(102, 0, 0));
         add3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         proj.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         proj.setForeground(new java.awt.Color(255, 255, 51));
-        proj.setText("Add Project");
+        proj.setText("Deploy Project");
         proj.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                projMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 projMouseEntered(evt);
             }
@@ -379,7 +388,7 @@ public class Home extends javax.swing.JInternalFrame {
         add3Layout.setHorizontalGroup(
             add3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(add3Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
+                .addGap(23, 23, 23)
                 .addComponent(proj)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -400,20 +409,23 @@ public class Home extends javax.swing.JInternalFrame {
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                .addGap(0, 70, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(add3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel11.setBackground(new java.awt.Color(102, 102, 102));
         jPanel11.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(255, 255, 0)));
 
-        add2.setBackground(new java.awt.Color(51, 0, 0));
+        add2.setBackground(new java.awt.Color(102, 0, 0));
         add2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         dept.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         dept.setForeground(new java.awt.Color(255, 255, 51));
-        dept.setText("Add Department");
+        dept.setText("Payslip");
         dept.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                deptMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 deptMouseEntered(evt);
             }
@@ -426,10 +438,10 @@ public class Home extends javax.swing.JInternalFrame {
         add2.setLayout(add2Layout);
         add2Layout.setHorizontalGroup(
             add2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, add2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(add2Layout.createSequentialGroup()
+                .addGap(68, 68, 68)
                 .addComponent(dept)
-                .addGap(14, 14, 14))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         add2Layout.setVerticalGroup(
             add2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -448,8 +460,59 @@ public class Home extends javax.swing.JInternalFrame {
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                .addGap(0, 70, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(add2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        jPanel12.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel12.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(255, 255, 0)));
+
+        add4.setBackground(new java.awt.Color(102, 0, 0));
+        add4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        dept1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        dept1.setForeground(new java.awt.Color(255, 255, 51));
+        dept1.setText("Add Department");
+        dept1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                dept1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                dept1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                dept1MouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout add4Layout = new javax.swing.GroupLayout(add4);
+        add4.setLayout(add4Layout);
+        add4Layout.setHorizontalGroup(
+            add4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, add4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(dept1)
+                .addGap(14, 14, 14))
+        );
+        add4Layout.setVerticalGroup(
+            add4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(add4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(dept1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(add4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(add4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -468,14 +531,16 @@ public class Home extends javax.swing.JInternalFrame {
                             .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+                            .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(52, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -492,15 +557,12 @@ public class Home extends javax.swing.JInternalFrame {
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(161, 161, 161)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(167, 167, 167)
-                                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(161, 161, 161)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(242, Short.MAX_VALUE))
         );
 
@@ -508,12 +570,12 @@ public class Home extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void empMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_empMouseEntered
-       Color clr=new Color(0,0,102);
-       add.setBackground(clr);
+        Color clr=new Color(0,0,102);
+        add.setBackground(clr);
     }//GEN-LAST:event_empMouseEntered
 
     private void empMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_empMouseExited
-        Color clr = new Color(51,0,0);  
+        Color clr = new Color(102,0,0);  
         add.setBackground(clr);
     }//GEN-LAST:event_empMouseExited
 
@@ -523,7 +585,7 @@ public class Home extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_projMouseEntered
 
     private void projMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_projMouseExited
-        Color clr = new Color(51,0,0);  
+        Color clr = new Color(102,0,0);  
         add3.setBackground(clr);
     }//GEN-LAST:event_projMouseExited
 
@@ -533,16 +595,46 @@ public class Home extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_deptMouseEntered
 
     private void deptMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deptMouseExited
-        Color clr = new Color(51,0,0);  
+        Color clr = new Color(102,0,0);  
         add2.setBackground(clr);
     }//GEN-LAST:event_deptMouseExited
+
+    private void dept1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dept1MouseEntered
+        Color clr=new Color(0,0,102);
+        add4.setBackground(clr);
+    }//GEN-LAST:event_dept1MouseEntered
+
+    private void dept1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dept1MouseExited
+        Color clr = new Color(102,0,0);  
+        add4.setBackground(clr);
+    }//GEN-LAST:event_dept1MouseExited
+
+    private void empMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_empMouseClicked
+        AddEmployee a = new AddEmployee();
+        a.setVisible(true);
+    }//GEN-LAST:event_empMouseClicked
+
+    private void projMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_projMouseClicked
+        AddProject a = new AddProject();
+        a.setVisible(true);
+    }//GEN-LAST:event_projMouseClicked
+
+    private void dept1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dept1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dept1MouseClicked
+
+    private void deptMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deptMouseClicked
+        
+    }//GEN-LAST:event_deptMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel add;
     private javax.swing.JPanel add2;
     private javax.swing.JPanel add3;
+    private javax.swing.JPanel add4;
     private javax.swing.JLabel dept;
+    private javax.swing.JLabel dept1;
     private javax.swing.JLabel deptstat;
     private javax.swing.JLabel emp;
     private javax.swing.JLabel empstat;
@@ -558,6 +650,7 @@ public class Home extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
