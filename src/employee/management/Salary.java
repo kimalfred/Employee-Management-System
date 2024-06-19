@@ -235,6 +235,7 @@ public class Salary extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
+        jTable3.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(102, 0, 0)));
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null},
