@@ -237,7 +237,7 @@ public class CheckProject extends javax.swing.JFrame {
         status.setBackground(new java.awt.Color(255, 255, 255));
         status.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         status.setForeground(new java.awt.Color(0, 0, 0));
-        status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Approved", "Rejected" }));
+        status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pending", "Working", "Approved", "Rejected" }));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel14.setText("Mark");
