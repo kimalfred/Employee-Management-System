@@ -147,7 +147,7 @@ public class Salary extends javax.swing.JInternalFrame {
         month.setBackground(new java.awt.Color(255, 255, 255));
         month.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         month.setForeground(new java.awt.Color(0, 0, 0));
-        month.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", " " }));
+        month.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -238,13 +238,13 @@ public class Salary extends javax.swing.JInternalFrame {
         jTable3.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(102, 0, 0)));
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Number", "Employee ID", "Name", "Email", "Position", "Month", "Overtime Pay", "Deduction", "Net Salary"
+                "Number", "Employee ID", "Name", "Email", "Position", "Month", "Date Release", "Overtime Pay", "Deduction", "Net Salary"
             }
         ));
         jScrollPane3.setViewportView(jTable3);
