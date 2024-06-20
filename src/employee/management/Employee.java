@@ -62,8 +62,7 @@ public class Employee extends javax.swing.JInternalFrame {
             Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);            
-        }
-    
+        }    
     }
 
     /**

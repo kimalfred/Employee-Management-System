@@ -10,11 +10,17 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.Date;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
-
+import javax.swing.table.DefaultTableModel;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 /**
  *
  * @author Kim Alfred
@@ -30,7 +36,41 @@ public class Salary extends javax.swing.JInternalFrame {
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
         BasicInternalFrameUI ui=(BasicInternalFrameUI)this.getUI();
         ui.setNorthPane(null);
+        
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/javadb","root", "");
+            pst=con.prepareStatement("Select * from payslip_tb");
+            rs=pst.executeQuery();
+            ResultSetMetaData rsmd =rs.getMetaData();
+            int n=rsmd.getColumnCount();
+            DefaultTableModel dtm=(DefaultTableModel) paysliptb.getModel();
+            dtm.setRowCount(0);
+            
+            while(rs.next()){
+                Vector v=new Vector();
+                for(int i=1;i<=n;i++){
+                    v.add(rs.getString("id"));
+                    v.add(rs.getString("emp_id"));
+                    v.add(rs.getString("name"));
+                    v.add(rs.getString("email"));
+                    v.add(rs.getString("position"));
+                    v.add(rs.getString("release"));
+                    v.add(rs.getString("ot_pay")); 
+                    v.add(rs.getString("deduction"));
+                    v.add(rs.getString("salary"));
+                }
+                //System.out.print(v);
+                dtm.addRow(v);
+            }
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);            
+        }
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -62,8 +102,10 @@ public class Salary extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         month = new com.toedter.calendar.JDateChooser();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        paysliptb = new javax.swing.JTable();
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -128,7 +170,12 @@ public class Salary extends javax.swing.JInternalFrame {
         jButton2.setBackground(new java.awt.Color(255, 153, 153));
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jButton2.setText("Clear");
+        jButton2.setText("Update");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -171,24 +218,32 @@ public class Salary extends javax.swing.JInternalFrame {
         month.setForeground(new java.awt.Color(0, 0, 0));
         month.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
+        jButton4.setBackground(new java.awt.Color(255, 153, 153));
+        jButton4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(0, 0, 0));
+        jButton4.setText("Clear");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setBackground(new java.awt.Color(255, 153, 153));
+        jButton5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton5.setForeground(new java.awt.Color(0, 0, 0));
+        jButton5.setText("Clear");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(35, 35, 35)
-                                .addComponent(jLabel1))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(34, 34, 34)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(34, 34, 34)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 24, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,8 +265,20 @@ public class Salary extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel8)
                                     .addComponent(jLabel9))
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(month, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap())
+                            .addComponent(month, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -250,15 +317,19 @@ public class Salary extends javax.swing.JInternalFrame {
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(net, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12))
         );
 
-        jTable3.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(102, 0, 0)));
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        paysliptb.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(102, 0, 0)));
+        paysliptb.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null},
@@ -269,7 +340,12 @@ public class Salary extends javax.swing.JInternalFrame {
                 "Number", "Employee ID", "Name", "Email", "Position", "Date Release", "Overtime Pay", "Deduction", "Salary"
             }
         ));
-        jScrollPane3.setViewportView(jTable3);
+        paysliptb.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                paysliptbMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(paysliptb);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -277,7 +353,7 @@ public class Salary extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 878, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 880, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -392,6 +468,49 @@ public class Salary extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void paysliptbMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paysliptbMouseClicked
+        DefaultTableModel model = (DefaultTableModel) paysliptb.getModel();
+        int selectedIndex = paysliptb.getSelectedRow();
+
+        empid.setText(model.getValueAt(selectedIndex, 1).toString());
+        name.setText(model.getValueAt(selectedIndex, 2).toString());
+        email.setText(model.getValueAt(selectedIndex, 3).toString());
+        post.setText(model.getValueAt(selectedIndex, 4).toString());
+
+        String dateString = model.getValueAt(selectedIndex, 5).toString();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date date = dateFormat.parse(dateString);
+            month.setDate(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        otpay.setText(model.getValueAt(selectedIndex, 6).toString());
+        deduc.setText(model.getValueAt(selectedIndex, 7).toString());
+        net.setText(model.getValueAt(selectedIndex, 8).toString());
+
+    }//GEN-LAST:event_paysliptbMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        empid.setText(""); 
+        name.setText("");  
+        email.setText(""); 
+        post.setText("");           
+        month.setDate(null);
+        otpay.setText("");
+        deduc.setText("");
+        net.setText("");
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField deduc;
@@ -399,6 +518,8 @@ public class Salary extends javax.swing.JInternalFrame {
     private javax.swing.JTextField empid;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -411,11 +532,11 @@ public class Salary extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable3;
     private com.toedter.calendar.JDateChooser month;
     private javax.swing.JTextField name;
     private javax.swing.JTextField net;
     private javax.swing.JTextField otpay;
+    private javax.swing.JTable paysliptb;
     private javax.swing.JTextField post;
     // End of variables declaration//GEN-END:variables
 }
