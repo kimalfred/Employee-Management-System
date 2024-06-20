@@ -330,16 +330,15 @@ public class Salary extends javax.swing.JInternalFrame {
             String sname = name.getText();
             String employeeId = empid.getText();
             String semail = email.getText();
-            String posts =post.getText();
+            String posts = post.getText();
             Date months = month.getDate();
             String otpays = otpay.getText();
             String deducs = deduc.getText();
             String nets = net.getText();
-            
 
             if (sname.isEmpty() || employeeId.isEmpty() || semail.isEmpty() || posts.isEmpty() || months == null || otpays.isEmpty() || deducs.isEmpty() || nets.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Please fill in all fields.");
-                return; 
+                return;
             }
 
             String url = "jdbc:mysql://localhost/javadb";
@@ -349,18 +348,17 @@ public class Salary extends javax.swing.JInternalFrame {
             try (Connection con = DriverManager.getConnection(url, dbUsername, dbPassword)) {
                 con.setAutoCommit(false);
 
-
                 String checkQuery = "SELECT COUNT(*) FROM payslip_tb WHERE emp_id = ?";
                 try (PreparedStatement checkPst = con.prepareStatement(checkQuery)) {
-                    checkPst.setString(1, semail);
+                    checkPst.setString(1, employeeId);
                     ResultSet rs = checkPst.executeQuery();
                     if (rs.next() && rs.getInt(1) > 0) {
-                        JOptionPane.showMessageDialog(this, "Already have a Payslip");                       
-                        return; 
+                        JOptionPane.showMessageDialog(this, "Employee already has a Payslip");
+                        return;
                     }
                 }
 
-                String insertQuery = "INSERT INTO payslip_tb (emp_id, name, email, position, release, ot_pay, deduction, salary) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                String insertQuery = "INSERT INTO payslip_tb (emp_id, name, email, position, `release`, ot_pay, deduction, salary) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
                 try (PreparedStatement pst = con.prepareStatement(insertQuery)) {
                     pst.setString(1, employeeId);
@@ -370,7 +368,7 @@ public class Salary extends javax.swing.JInternalFrame {
 
                     java.sql.Date sqlStartDate = new java.sql.Date(months.getTime());
                     pst.setDate(5, sqlStartDate);
-                    
+
                     pst.setString(6, otpays);
                     pst.setString(7, deducs);
                     pst.setString(8, nets);
@@ -391,6 +389,7 @@ public class Salary extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
