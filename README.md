@@ -70,7 +70,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.Transport;
 
-//For button on your GUI and your own logic
+//For button on your GUI or your own logic
 String ToEmail = txtToEmail.getText();
 String FromEmail = txtFromEmail.getText();
 String FromEmailPassword = "__"; // Your App Password
