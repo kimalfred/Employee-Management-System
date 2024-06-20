@@ -6,6 +6,7 @@ package employee.management;
 
 import static employee.management.ManageSick.search;
 import java.awt.Color;
+import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -545,7 +546,27 @@ public class Salary extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        try {
+            String idToDelete = empid.getText();
+
+            if (!idToDelete.isEmpty()) {
+                String sql = "DELETE FROM payslip_tb WHERE emp_id =?";
+                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/javadb", "root", "");
+                pst = con.prepareStatement(sql);
+                pst.setString(1, idToDelete);
+                int rowsAffected = pst.executeUpdate();
+
+                if (rowsAffected > 0) {
+                    JOptionPane.showMessageDialog(null, "Delete Successfully");
+                } else {
+                    JOptionPane.showMessageDialog(null, "No records found with the specified Employee ID");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Please enter Employee ID to delete");
+            }
+        } catch (SQLException | HeadlessException ex) {
+                JOptionPane.showMessageDialog(null, ex);
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
