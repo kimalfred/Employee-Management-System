@@ -363,7 +363,6 @@ public class AddEmployee extends javax.swing.JFrame {
                 }
             }
         } finally {
-            // Close resources in the finally block
             try {
                 if (rs != null) {
                     rs.close();
