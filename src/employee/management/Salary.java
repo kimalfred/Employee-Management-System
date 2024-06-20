@@ -167,7 +167,7 @@ public class Salary extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(255, 153, 153));
+        jButton2.setBackground(new java.awt.Color(0, 153, 0));
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setText("Update");
@@ -218,17 +218,17 @@ public class Salary extends javax.swing.JInternalFrame {
         month.setForeground(new java.awt.Color(0, 0, 0));
         month.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
-        jButton4.setBackground(new java.awt.Color(255, 153, 153));
+        jButton4.setBackground(new java.awt.Color(0, 153, 0));
         jButton4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton4.setForeground(new java.awt.Color(0, 0, 0));
-        jButton4.setText("Clear");
+        jButton4.setText("Delete");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
 
-        jButton5.setBackground(new java.awt.Color(255, 153, 153));
+        jButton5.setBackground(new java.awt.Color(0, 153, 0));
         jButton5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton5.setForeground(new java.awt.Color(0, 0, 0));
         jButton5.setText("Clear");
@@ -493,6 +493,62 @@ public class Salary extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_paysliptbMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            String sname = name.getText();
+            String employeeId = empid.getText();
+            String semail = email.getText();
+            String posts = post.getText();
+            Date months = month.getDate();
+            String otpays = otpay.getText();
+            String deducs = deduc.getText();
+            String nets = net.getText();
+
+            if (sname.isEmpty() || employeeId.isEmpty() || semail.isEmpty() || posts.isEmpty() || months == null ||
+                    otpays.isEmpty() || deducs.isEmpty() || nets.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please fill in all fields.");
+                return;
+            }
+
+            String url = "jdbc:mysql://localhost/javadb";
+            String dbUsername = "root";
+            String dbPassword = "";
+
+            try (Connection con = DriverManager.getConnection(url, dbUsername, dbPassword)) {
+                String updateQuery = "UPDATE payslip_tb SET name = ?, email = ?, position = ?, `release` = ?, ot_pay = ?, deduction = ?, salary = ? WHERE emp_id = ?";
+
+                try (PreparedStatement pst = con.prepareStatement(updateQuery)) {                   
+                    pst.setString(1, sname);
+                    pst.setString(2, semail);
+                    pst.setString(3, posts);
+
+                    java.sql.Date sqlStartDate = new java.sql.Date(months.getTime());
+                    pst.setDate(4, sqlStartDate);
+
+                    pst.setString(5, otpays);
+                    pst.setString(6, deducs);
+                    pst.setString(7, nets);
+
+                    pst.setString(8, employeeId);
+                    int rowsAffected = pst.executeUpdate();
+
+                    if (rowsAffected > 0) {
+                        JOptionPane.showMessageDialog(this, "Update Successful!");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "No records updated. Employee ID not found.");
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "An error occurred. Please check console for details.");
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         empid.setText(""); 
         name.setText("");  
         email.setText(""); 
@@ -501,14 +557,6 @@ public class Salary extends javax.swing.JInternalFrame {
         otpay.setText("");
         deduc.setText("");
         net.setText("");
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
 
