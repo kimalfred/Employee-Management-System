@@ -386,6 +386,7 @@ public class UserPanel extends javax.swing.JFrame {
         UserSalary home=new UserSalary();
         user.removeAll();
         user.add(home).setVisible(true);
+        home.search.setText(email.getText());
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void logMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logMouseEntered
