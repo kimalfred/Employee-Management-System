@@ -5,7 +5,7 @@ The Employee Management System is a comprehensive application designed to manage
 
 ## Features
 - **Admin, Manager, and Employee Login:**
-  - Admin: Full access to manage employees, departments, projects, and view reports.
+  - Admin: Full access to manage employees, departments, projects, salary, and view reports.
   - Manager: Can manage assigned projects, view team attendance, and approve leaves.
   - Employee: Can mark attendance, apply for leaves, and view salary details.
 
@@ -70,7 +70,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.Transport;
 
-//For button on your GUI and your own logic
+//For button on your GUI or your own logic
 String ToEmail = txtToEmail.getText();
 String FromEmail = txtFromEmail.getText();
 String FromEmailPassword = "__"; // Your App Password
