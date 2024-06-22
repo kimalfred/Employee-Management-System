@@ -19,6 +19,7 @@ The Employee Management System is a comprehensive application designed to manage
 
 - **Salary Management:**
   - View and manage employee salary details.
+  - Generate pdf and print payslip.
 
 - **Department Management:**
   - Manage different departments within the organization.
