@@ -4,12 +4,24 @@
  */
 package employee.management;
 
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.print.PageFormat;
+import java.awt.print.Paper;
+import java.awt.print.Printable;
+import static java.awt.print.Printable.NO_SUCH_PAGE;
+import static java.awt.print.Printable.PAGE_EXISTS;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+
+
 
 /**
  *
@@ -20,14 +32,106 @@ public class UserSalary extends javax.swing.JInternalFrame {
     Connection con = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
+    private double bHeight;
+    
     
     public UserSalary() {
         initComponents();
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
         BasicInternalFrameUI ui=(BasicInternalFrameUI)this.getUI();
         ui.setNorthPane(null);
+                
     }
+   
+    public PageFormat getPageFormat(PrinterJob pj){    
+        PageFormat pf = pj.defaultPage();
+        Paper paper = pf.getPaper();    
+        double bodyHeight = bHeight;  
+        double headerHeight = 5.0;                  
+        double footerHeight = 5.0;        
+        double width = cm_to_pp(8); 
+        double height = cm_to_pp(headerHeight+bodyHeight+footerHeight); 
+        paper.setSize(width, height);
+        paper.setImageableArea(0,10,width,height - cm_to_pp(1));        
+        pf.setOrientation(PageFormat.PORTRAIT);  
+        pf.setPaper(paper);    
+        return pf;
+    }
+       
+            
+protected static double cm_to_pp(double cm)
+    {            
+	        return toPPI(cm * 0.393600787);            
+    }
+ 
+protected static double toPPI(double inch)
+    {            
+	        return inch * 72d;            
 
+    }                         
+    public class BillPrintable implements Printable {
+    public int print(Graphics graphics, PageFormat pageFormat,int pageIndex) 
+    throws PrinterException 
+
+    {
+
+        int result = NO_SUCH_PAGE;    
+          if (pageIndex == 0) {                    
+
+              Graphics2D g2d = (Graphics2D) graphics;                    
+              double width = pageFormat.getImageableWidth();                               
+              g2d.translate((int) pageFormat.getImageableX(),(int) pageFormat.getImageableY()); 
+
+
+            //  FontMetrics metrics=g2d.getFontMetrics(new Font("Arial",Font.BOLD,7));
+
+          try{
+              int y=20;
+              int yShift = 10;
+              int headerRectHeight=15;
+             // int headerRectHeighta=40;
+
+
+              g2d.setFont(new Font("Monospaced",Font.PLAIN,9));
+
+              g2d.drawString("--------------------------------------------------------", 12, y); y += yShift;
+              g2d.drawString("                         PAYSLIP          ", 12, y); y += yShift;
+              g2d.drawString("                     [CBZ Tech Inc.]       ", 12, y); y += yShift;
+              g2d.drawString("                  Central Signal Village         ", 12, y); y += yShift;
+              g2d.drawString("                 Taguig City, Philippines         ", 12, y); y += yShift;
+              g2d.drawString("                      +63 0931939392       ", 12, y); y += yShift;
+              g2d.drawString("--------------------------------------------------------", 12, y); y += headerRectHeight;
+              g2d.drawString("Employee Name: " + name.getText(), 10, y); y += yShift;
+              g2d.drawString("Employee ID  : " + empid.getText(), 10, y); y += yShift;
+              g2d.drawString("Email Address  : " + email.getText(), 10, y); y += yShift;
+              g2d.drawString("Position  : " + post.getText(), 10, y); y += yShift;
+              g2d.drawString("Pay Date  : " + release.getText(), 10, y); y += yShift;
+              g2d.drawString("--------------------------------------------------------", 10, y); y += headerRectHeight;
+              g2d.drawString("Description                                       Amount", 10, y); y += yShift;
+              g2d.drawString("--------------------------------------------------------", 10, y); y += headerRectHeight;
+              g2d.drawString("Overtime Pay:          " + otpay.getText(), 10, y); y += yShift;
+              g2d.drawString("Deduction:            " + deduc.getText(), 10, y); y += yShift;
+              g2d.drawString("Salary:            " + salary.getText(), 10, y); y += yShift;
+              g2d.drawString("--------------------------------------------------------", 10, y); y += yShift;
+              g2d.drawString("Net Salary:            " + net.getText(), 10, y); y += yShift;  
+              g2d.drawString("--------------------------------------------------------", 10, y); y += yShift;
+              g2d.drawString("********************************************************", 10, y); y += yShift;
+              g2d.drawString("                        THANK YOU         ", 10, y); y += yShift;
+              g2d.drawString("********************************************************", 10, y); y += yShift;
+              g2d.drawString("                     [CBZ Tech Inc.]         ", 10, y); y += yShift;
+              g2d.drawString("               CONTACT: [projecta245@gmail.com]       ", 10, y); y += yShift;  
+              g2d.drawString("                     @2024 Copyright         ", 10, y); y += yShift;
+
+      }
+      catch(Exception e){
+      e.printStackTrace();
+      }
+
+                result = PAGE_EXISTS;    
+            }    
+            return result;    
+        }
+   }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -58,7 +162,10 @@ public class UserSalary extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         salary = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        print = new javax.swing.JButton();
+        net = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        print1 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setPreferredSize(new java.awt.Dimension(1080, 630));
@@ -170,52 +277,81 @@ public class UserSalary extends javax.swing.JInternalFrame {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Salary");
 
-        jButton1.setBackground(new java.awt.Color(0, 153, 0));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("Print Payslip");
+        print.setBackground(new java.awt.Color(0, 153, 0));
+        print.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        print.setForeground(new java.awt.Color(0, 0, 0));
+        print.setText("Print Payslip");
+        print.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                printActionPerformed(evt);
+            }
+        });
+
+        net.setBackground(new java.awt.Color(255, 255, 255));
+        net.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        net.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Net Salary");
+
+        print1.setBackground(new java.awt.Color(0, 153, 0));
+        print1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        print1.setForeground(new java.awt.Color(0, 0, 0));
+        print1.setText("Calculate Salary");
+        print1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                print1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(stat)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(stat)
+                        .addGap(246, 246, 246)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(print, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGap(72, 72, 72)
-                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel1)
-                                            .addComponent(empid, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel4)
-                                        .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel2)
-                                        .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel7)
-                                        .addComponent(post, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(65, 65, 65)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel3)
-                                                .addComponent(release, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jLabel6)
-                                                .addComponent(jLabel5))
-                                            .addComponent(otpay, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(deduc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(salary, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(net, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(343, 343, 343)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(72, 72, 72)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(empid, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel4)
+                                .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel2)
+                                .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel7)
+                                .addComponent(post, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(65, 65, 65)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel3)
+                                        .addComponent(release, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel6)
+                                        .addComponent(jLabel5))
+                                    .addComponent(otpay, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(deduc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(salary, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(360, 360, 360)
+                        .addComponent(print1)))
                 .addContainerGap(117, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -244,8 +380,8 @@ public class UserSalary extends javax.swing.JInternalFrame {
                             .addComponent(jLabel2)
                             .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(email, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(deduc, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -254,9 +390,15 @@ public class UserSalary extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(post, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(salary, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(79, 79, 79)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(350, 350, 350)
+                .addGap(30, 30, 30)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(net, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(print1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43)
+                .addComponent(print, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(270, 270, 270)
                 .addComponent(stat)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -321,12 +463,35 @@ public class UserSalary extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_searchKeyReleased
 
+    private void printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printActionPerformed
+        PrinterJob pj = PrinterJob.getPrinterJob();
+        pj.setPrintable(new BillPrintable(),getPageFormat(pj));
+          
+        try{
+            pj.print();
+        }
+        catch(PrinterException ex){
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_printActionPerformed
+
+    private void print1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_print1ActionPerformed
+        double otPay = Double.parseDouble(otpay.getText());
+        double salaryAmount = Double.parseDouble(salary.getText());
+        double totalIncome = otPay + salaryAmount;
+
+        double deduction = Double.parseDouble(deduc.getText());
+        double netIncome = totalIncome - deduction;
+
+        String totalString = String.valueOf(totalIncome);
+        net.setText(totalString);
+    }//GEN-LAST:event_print1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField deduc;
     private javax.swing.JTextField email;
     private javax.swing.JTextField empid;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -335,12 +500,16 @@ public class UserSalary extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField name;
+    private javax.swing.JTextField net;
     private javax.swing.JTextField otpay;
     private javax.swing.JTextField post;
+    private javax.swing.JButton print;
+    private javax.swing.JButton print1;
     private javax.swing.JTextField release;
     private javax.swing.JTextField salary;
     public static javax.swing.JTextField search;
