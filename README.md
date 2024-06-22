@@ -12,6 +12,7 @@ The Employee Management System is a comprehensive application designed to manage
 - **Employee Attendance:**
   - Track employee time-in and time-out.
   - Generate attendance reports.
+  - Generate print payslip form.
 
 - **Leave Management:**
   - Employees can apply for leave.
