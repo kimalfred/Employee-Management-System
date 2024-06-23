@@ -95,17 +95,21 @@ protected static double toPPI(double inch)
               g2d.setFont(new Font("Monospaced",Font.PLAIN,9));
 
               g2d.drawString("--------------------------------------------------------", 12, y); y += yShift;
+              g2d.drawString("                                                        ", 12, y); y += headerRectHeight;
               g2d.drawString("                         PAYSLIP          ", 12, y); y += yShift;
               g2d.drawString("                     [CBZ Tech Inc.]       ", 12, y); y += yShift;
               g2d.drawString("                  Central Signal Village         ", 12, y); y += yShift;
               g2d.drawString("                 Taguig City, Philippines         ", 12, y); y += yShift;
               g2d.drawString("                      +63 0931939392       ", 12, y); y += yShift;
+              g2d.drawString("                                                        ", 12, y); y += headerRectHeight;
               g2d.drawString("--------------------------------------------------------", 12, y); y += headerRectHeight;
+              g2d.drawString("                                                        ", 12, y); y += headerRectHeight;
               g2d.drawString("Employee Name: " + name.getText(), 10, y); y += yShift;
               g2d.drawString("Employee ID  : " + empid.getText(), 10, y); y += yShift;
               g2d.drawString("Email Address  : " + email.getText(), 10, y); y += yShift;
               g2d.drawString("Position  : " + post.getText(), 10, y); y += yShift;
               g2d.drawString("Pay Date  : " + release.getText(), 10, y); y += yShift;
+              g2d.drawString("                                                        ", 12, y); y += headerRectHeight;
               g2d.drawString("--------------------------------------------------------", 10, y); y += headerRectHeight;
               g2d.drawString("Description                                       Amount", 10, y); y += yShift;
               g2d.drawString("--------------------------------------------------------", 10, y); y += headerRectHeight;
@@ -115,6 +119,7 @@ protected static double toPPI(double inch)
               g2d.drawString("--------------------------------------------------------", 10, y); y += yShift;
               g2d.drawString("Net Salary:            " + net.getText(), 10, y); y += yShift;  
               g2d.drawString("--------------------------------------------------------", 10, y); y += yShift;
+              g2d.drawString("                                                        ", 12, y); y += headerRectHeight;
               g2d.drawString("********************************************************", 10, y); y += yShift;
               g2d.drawString("                        THANK YOU         ", 10, y); y += yShift;
               g2d.drawString("********************************************************", 10, y); y += yShift;
