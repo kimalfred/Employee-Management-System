@@ -170,7 +170,6 @@ protected static double toPPI(double inch)
         print = new javax.swing.JButton();
         net = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        print1 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setPreferredSize(new java.awt.Dimension(1080, 630));
@@ -300,16 +299,6 @@ protected static double toPPI(double inch)
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Net Salary");
 
-        print1.setBackground(new java.awt.Color(0, 153, 0));
-        print1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        print1.setForeground(new java.awt.Color(0, 0, 0));
-        print1.setText("Calculate Salary");
-        print1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                print1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -353,10 +342,7 @@ protected static double toPPI(double inch)
                                         .addComponent(jLabel5))
                                     .addComponent(otpay, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(deduc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(salary, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(360, 360, 360)
-                        .addComponent(print1)))
+                            .addComponent(salary, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(117, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -399,11 +385,9 @@ protected static double toPPI(double inch)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(net, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(print1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
+                .addGap(58, 58, 58)
                 .addComponent(print, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(270, 270, 270)
+                .addGap(296, 296, 296)
                 .addComponent(stat)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -469,6 +453,16 @@ protected static double toPPI(double inch)
     }//GEN-LAST:event_searchKeyReleased
 
     private void printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printActionPerformed
+        double otPay = Double.parseDouble(otpay.getText());
+        double salaryAmount = Double.parseDouble(salary.getText());
+        double totalIncome = otPay + salaryAmount;
+
+        double deduction = Double.parseDouble(deduc.getText());
+        double netIncome = totalIncome - deduction;
+
+        String totalString = String.valueOf(totalIncome);
+        net.setText(totalString);
+        
         PrinterJob pj = PrinterJob.getPrinterJob();
         pj.setPrintable(new BillPrintable(),getPageFormat(pj));
           
@@ -479,18 +473,6 @@ protected static double toPPI(double inch)
             ex.printStackTrace();
         }
     }//GEN-LAST:event_printActionPerformed
-
-    private void print1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_print1ActionPerformed
-        double otPay = Double.parseDouble(otpay.getText());
-        double salaryAmount = Double.parseDouble(salary.getText());
-        double totalIncome = otPay + salaryAmount;
-
-        double deduction = Double.parseDouble(deduc.getText());
-        double netIncome = totalIncome - deduction;
-
-        String totalString = String.valueOf(totalIncome);
-        net.setText(totalString);
-    }//GEN-LAST:event_print1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -514,7 +496,6 @@ protected static double toPPI(double inch)
     private javax.swing.JTextField otpay;
     private javax.swing.JTextField post;
     private javax.swing.JButton print;
-    private javax.swing.JButton print1;
     private javax.swing.JTextField release;
     private javax.swing.JTextField salary;
     public static javax.swing.JTextField search;
