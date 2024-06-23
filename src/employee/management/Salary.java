@@ -91,8 +91,8 @@ public class Salary extends javax.swing.JInternalFrame {
         otpay = new javax.swing.JTextField();
         deduc = new javax.swing.JTextField();
         net = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        add = new javax.swing.JButton();
+        update = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -103,8 +103,8 @@ public class Salary extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         month = new com.toedter.calendar.JDateChooser();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        del = new javax.swing.JButton();
+        clear = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         paysliptb = new javax.swing.JTable();
 
@@ -158,23 +158,39 @@ public class Salary extends javax.swing.JInternalFrame {
         net.setForeground(new java.awt.Color(0, 0, 0));
         net.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jButton1.setBackground(new java.awt.Color(0, 153, 0));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("Add");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        add.setBackground(new java.awt.Color(255, 255, 255));
+        add.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        add.setForeground(new java.awt.Color(0, 0, 0));
+        add.setText("Add");
+        add.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                addMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                addMouseExited(evt);
+            }
+        });
+        add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                addActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(0, 153, 0));
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jButton2.setText("Update");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        update.setBackground(new java.awt.Color(255, 255, 255));
+        update.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        update.setForeground(new java.awt.Color(0, 0, 0));
+        update.setText("Update");
+        update.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                updateMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                updateMouseExited(evt);
+            }
+        });
+        update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                updateActionPerformed(evt);
             }
         });
 
@@ -219,23 +235,39 @@ public class Salary extends javax.swing.JInternalFrame {
         month.setForeground(new java.awt.Color(0, 0, 0));
         month.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
-        jButton4.setBackground(new java.awt.Color(0, 153, 0));
-        jButton4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(0, 0, 0));
-        jButton4.setText("Delete");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        del.setBackground(new java.awt.Color(255, 255, 255));
+        del.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        del.setForeground(new java.awt.Color(0, 0, 0));
+        del.setText("Delete");
+        del.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                delMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                delMouseExited(evt);
+            }
+        });
+        del.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                delActionPerformed(evt);
             }
         });
 
-        jButton5.setBackground(new java.awt.Color(0, 153, 0));
-        jButton5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(0, 0, 0));
-        jButton5.setText("Clear");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        clear.setBackground(new java.awt.Color(255, 255, 255));
+        clear.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        clear.setForeground(new java.awt.Color(0, 0, 0));
+        clear.setText("Clear");
+        clear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                clearMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                clearMouseExited(evt);
+            }
+        });
+        clear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                clearActionPerformed(evt);
             }
         });
 
@@ -268,17 +300,17 @@ public class Salary extends javax.swing.JInternalFrame {
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(month, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(del, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(clear, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addComponent(jLabel1))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(add, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(update, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -320,12 +352,12 @@ public class Salary extends javax.swing.JInternalFrame {
                 .addComponent(net, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(add, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(update, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(clear, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(del, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12))
         );
 
@@ -402,7 +434,7 @@ public class Salary extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_empidKeyReleased
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
         try {
             String sname = name.getText();
             String employeeId = empid.getText();
@@ -467,7 +499,7 @@ public class Salary extends javax.swing.JInternalFrame {
             e.printStackTrace();
         }
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_addActionPerformed
 
     private void paysliptbMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paysliptbMouseClicked
         DefaultTableModel model = (DefaultTableModel) paysliptb.getModel();
@@ -493,7 +525,7 @@ public class Salary extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_paysliptbMouseClicked
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
         try {
             String sname = name.getText();
             String employeeId = empid.getText();
@@ -543,9 +575,9 @@ public class Salary extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "An error occurred. Please check console for details.");
             ex.printStackTrace();
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_updateActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void delActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delActionPerformed
         try {
             String idToDelete = empid.getText();
 
@@ -567,9 +599,9 @@ public class Salary extends javax.swing.JInternalFrame {
         } catch (SQLException | HeadlessException ex) {
                 JOptionPane.showMessageDialog(null, ex);
         }
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_delActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
         empid.setText(""); 
         name.setText("");  
         email.setText(""); 
@@ -578,17 +610,56 @@ public class Salary extends javax.swing.JInternalFrame {
         otpay.setText("");
         deduc.setText("");
         net.setText("");
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_clearActionPerformed
+
+    private void addMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMouseEntered
+        Color clr=new Color(0, 0, 255);
+        add.setBackground(clr);
+    }//GEN-LAST:event_addMouseEntered
+
+    private void addMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMouseExited
+        Color clr=new Color(255,255,255);
+        add.setBackground(clr);
+    }//GEN-LAST:event_addMouseExited
+
+    private void updateMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateMouseEntered
+        Color clr=new Color(0, 0, 255);
+        update.setBackground(clr);
+    }//GEN-LAST:event_updateMouseEntered
+
+    private void updateMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateMouseExited
+        Color clr=new Color(255,255,255);
+        update.setBackground(clr);
+    }//GEN-LAST:event_updateMouseExited
+
+    private void delMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_delMouseEntered
+        Color clr=new Color(0, 0, 255);
+        del.setBackground(clr);
+    }//GEN-LAST:event_delMouseEntered
+
+    private void delMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_delMouseExited
+        Color clr=new Color(255,255,255);
+        del.setBackground(clr);
+    }//GEN-LAST:event_delMouseExited
+
+    private void clearMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearMouseEntered
+        Color clr=new Color(0, 0, 255);
+        clear.setBackground(clr);
+    }//GEN-LAST:event_clearMouseEntered
+
+    private void clearMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearMouseExited
+        Color clr=new Color(255,255,255);
+        clear.setBackground(clr);
+    }//GEN-LAST:event_clearMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton add;
+    private javax.swing.JButton clear;
     private javax.swing.JTextField deduc;
+    private javax.swing.JButton del;
     private javax.swing.JTextField email;
     private javax.swing.JTextField empid;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -607,5 +678,6 @@ public class Salary extends javax.swing.JInternalFrame {
     private javax.swing.JTextField otpay;
     private javax.swing.JTable paysliptb;
     private javax.swing.JTextField post;
+    private javax.swing.JButton update;
     // End of variables declaration//GEN-END:variables
 }

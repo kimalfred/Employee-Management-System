@@ -4,6 +4,7 @@
  */
 package employee.management;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -281,10 +282,18 @@ protected static double toPPI(double inch)
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Salary");
 
-        print.setBackground(new java.awt.Color(0, 153, 0));
+        print.setBackground(new java.awt.Color(255, 255, 255));
         print.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         print.setForeground(new java.awt.Color(0, 0, 0));
         print.setText("Print Payslip");
+        print.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                printMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                printMouseExited(evt);
+            }
+        });
         print.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 printActionPerformed(evt);
@@ -385,14 +394,14 @@ protected static double toPPI(double inch)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(net, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
-                .addGap(58, 58, 58)
+                .addGap(66, 66, 66)
                 .addComponent(print, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(296, 296, 296)
+                .addGap(288, 288, 288)
                 .addComponent(stat)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 920, 580));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 920, 600));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -402,7 +411,7 @@ protected static double toPPI(double inch)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 710, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE)
         );
 
         pack();
@@ -473,6 +482,16 @@ protected static double toPPI(double inch)
             ex.printStackTrace();
         }
     }//GEN-LAST:event_printActionPerformed
+
+    private void printMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_printMouseEntered
+        Color clr=new Color(0,204,0);
+        print.setBackground(clr);
+    }//GEN-LAST:event_printMouseEntered
+
+    private void printMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_printMouseExited
+        Color clr=new Color(255,255,255);
+        print.setBackground(clr);
+    }//GEN-LAST:event_printMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
