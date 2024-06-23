@@ -6,8 +6,8 @@ The Employee Management System is a comprehensive application designed to manage
 ## Features
 - **Admin, Manager, and Employee Login:**
   - Admin: Full access to manage employees, departments, projects, salary, and view reports.
-  - Manager: Can manage assigned projects, view team attendance, and approve leaves.
-  - Employee: Can mark attendance, apply for leaves, and view salary details.
+  - Manager: Can manage assigned projects, and approve leaves.
+  - Employee: Can mark attendance, apply for leaves, and view salary details & print payslip.
 
 - **Employee Attendance:**
   - Track employee time-in and time-out.
@@ -19,6 +19,7 @@ The Employee Management System is a comprehensive application designed to manage
 
 - **Salary Management:**
   - View and manage employee salary details.
+  - Generate pdf and print payslip.
 
 - **Department Management:**
   - Manage different departments within the organization.
