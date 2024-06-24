@@ -1,7 +1,7 @@
 # Employee Management System
 
 ## Overview
-The Employee Management System is a comprehensive application designed to manage various employee-related functions in an organization. This system allows for different roles (Admin, Manager, Employee) with specific permissions and capabilities. Key features include employee attendance, leave management, salary details, department management, and project assignments. 
+The Employee Management System is a comprehensive application designed to manage various employee-related functions in an organization. This system allows for different roles (Admin, Manager, Employee) with specific permissions and capabilities. Key features include employee attendance, leave management, salary details, generate payslip, department management, and project assignments. 
 
 ## Features
 - **Admin, Manager, and Employee Login:**
