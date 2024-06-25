@@ -332,7 +332,7 @@ public class AddProject extends javax.swing.JFrame {
     private void search2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search2KeyReleased
         try {
             String query = "SELECT * FROM emptb WHERE employee_id = ?";
-            con = DriverManager.getConnection("jdbc:mysql://localhost/javadb", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/javadb", "root", "@kimalfred22");
 
             String sql = "SELECT * FROM emptb WHERE employee_id = ?";
             PreparedStatement pst = con.prepareStatement(sql);
@@ -412,7 +412,7 @@ public class AddProject extends javax.swing.JFrame {
             } else {
                 String url = "jdbc:mysql://localhost/javadb";
                 String dbUsername = "root";
-                String dbPassword = "";
+                String dbPassword = "@kimalfred22";
 
                 try (Connection con = DriverManager.getConnection(url, dbUsername, dbPassword)) {
                     String checkQuery = "SELECT COUNT(*) FROM project_db WHERE employee_id = ?";

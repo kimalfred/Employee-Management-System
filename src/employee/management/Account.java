@@ -366,7 +366,7 @@ public class Account extends javax.swing.JFrame {
     private void emailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_emailKeyReleased
         try {
             String query = "SELECT * FROM emptb WHERE email = ?";
-            con = DriverManager.getConnection("jdbc:mysql://localhost/javadb", "root", "");           
+            con = DriverManager.getConnection("jdbc:mysql://localhost/javadb", "root", "@kimalfred22");           
 
             String sql = "SELECT * FROM emptb WHERE email = ?";
             PreparedStatement pst = con.prepareStatement(sql);
@@ -447,7 +447,7 @@ public class Account extends javax.swing.JFrame {
 
             String url = "jdbc:mysql://localhost/javadb";
             String dbUsername = "root";
-            String dbPassword = "";
+            String dbPassword = "@kimalfred22";
 
             try (Connection con = DriverManager.getConnection(url, dbUsername, dbPassword)) {
                 String updateQuery = "UPDATE emptb SET name = ?, email = ?, number = ?, position = ?, department = ?, password = ?, usertype = ? WHERE employee_id = ?";

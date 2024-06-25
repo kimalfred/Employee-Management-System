@@ -11,7 +11,7 @@ import java.sql.Statement;
 public class DatabaseHelper {
     private static final String URL = "jdbc:mysql://localhost:3306/javadb";
     private static final String USER = "root";
-    private static final String PASSWORD = "";
+    private static final String PASSWORD = "@kimalfred22";
 
     public int getCount(String tableName) {
         int count = 0;

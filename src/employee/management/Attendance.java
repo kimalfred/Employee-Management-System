@@ -37,7 +37,7 @@ public class Attendance extends javax.swing.JInternalFrame {
         ui.setNorthPane(null);  
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/javadb","root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/javadb","root", "@kimalfred22");
             pst=con.prepareStatement("Select * from attendance");
             rs=pst.executeQuery();
             ResultSetMetaData rsmd =rs.getMetaData();
@@ -207,7 +207,7 @@ public class Attendance extends javax.swing.JInternalFrame {
 
             if (!idToDelete.isEmpty()) {
                 String sql = "DELETE FROM attendance WHERE id =?";
-                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/javadb", "root", "");
+                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/javadb", "root", "@kimalfred22");
                 pst = con.prepareStatement(sql);
                 pst.setString(1, idToDelete);
                 int rowsAffected = pst.executeUpdate();

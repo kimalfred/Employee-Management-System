@@ -424,7 +424,7 @@ protected static double toPPI(double inch)
     private void searchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchKeyReleased
         try {
             String query = "SELECT * FROM payslip_tb WHERE email = ?";
-            con = DriverManager.getConnection("jdbc:mysql://localhost/javadb", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/javadb", "root", "@kimalfred22");
 
             String sql = "SELECT * FROM payslip_tb WHERE email = ?";
             PreparedStatement pst = con.prepareStatement(sql);
@@ -444,7 +444,7 @@ protected static double toPPI(double inch)
                 String setposition = rs.getString("position");
                 post.setText(setposition);
                 
-                String setrel = rs.getString("release");
+                String setrel = rs.getString("payrec");
                 release.setText(setrel);
                 
                 String setot = rs.getString("ot_pay");

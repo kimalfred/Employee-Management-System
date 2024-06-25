@@ -37,7 +37,7 @@ public class StaffLeave extends javax.swing.JInternalFrame {
         
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/javadb","root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/javadb","root", "@kimalfred22");
             pst=con.prepareStatement("Select * from emp_leave");
             rs=pst.executeQuery();
             ResultSetMetaData rsmd =rs.getMetaData();
@@ -251,7 +251,7 @@ public class StaffLeave extends javax.swing.JInternalFrame {
 
             if (!idToDelete.isEmpty()) {
                 String sql = "DELETE FROM emp_leave WHERE id =?";
-                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/javadb", "root", "");
+                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/javadb", "root", "@kimalfred22");
                 pst = con.prepareStatement(sql);
                 pst.setString(1, idToDelete);
                 int rowsAffected = pst.executeUpdate();

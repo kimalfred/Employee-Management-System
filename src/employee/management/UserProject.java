@@ -431,7 +431,7 @@ public class UserProject extends javax.swing.JInternalFrame {
     private void search2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search2KeyReleased
         try {
             String query = "SELECT * FROM project_db WHERE email = ?";
-            con = DriverManager.getConnection("jdbc:mysql://localhost/javadb", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/javadb", "root", "@kimalfred22");
 
             String sql = "SELECT * FROM project_db WHERE email = ?";
             PreparedStatement pst = con.prepareStatement(sql);
@@ -483,7 +483,7 @@ public class UserProject extends javax.swing.JInternalFrame {
 
             String url = "jdbc:mysql://localhost/javadb";
             String dbUsername = "root";
-            String dbPassword = "";
+            String dbPassword = "@kimalfred22";
 
             try (Connection con = DriverManager.getConnection(url, dbUsername, dbPassword)) {
                 String updateQuery = "UPDATE project_db SET name = ?, email = ?, position = ?, department = ?, picture = ?, assigndate = ?, duedate = ?, proj_desc = ?, proj_msg = ?, submitted = ? WHERE employee_id = ?";

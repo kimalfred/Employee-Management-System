@@ -335,7 +335,7 @@ public class AddEmployee extends javax.swing.JFrame {
             } else {
                 String url = "jdbc:mysql://localhost/javadb";
                 String dbUsername = "root";
-                String dbPassword = "";
+                String dbPassword = "@kimalfred22";
 
                 try (Connection con = DriverManager.getConnection(url, dbUsername, dbPassword)) {
                     String insertQuery = "INSERT INTO emptb (employee_id, name, email, number, position, department, password, usertype) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";

@@ -40,7 +40,7 @@ public class Salary extends javax.swing.JInternalFrame {
         
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/javadb","root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/javadb","root", "@kimalfred22");
             pst=con.prepareStatement("Select * from payslip_tb");
             rs=pst.executeQuery();
             ResultSetMetaData rsmd =rs.getMetaData();
@@ -56,7 +56,7 @@ public class Salary extends javax.swing.JInternalFrame {
                     v.add(rs.getString("name"));
                     v.add(rs.getString("email"));
                     v.add(rs.getString("position"));
-                    v.add(rs.getString("release"));
+                    v.add(rs.getString("payrec"));
                     v.add(rs.getString("ot_pay")); 
                     v.add(rs.getString("deduction"));
                     v.add(rs.getString("salary"));
@@ -409,7 +409,7 @@ public class Salary extends javax.swing.JInternalFrame {
     private void empidKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_empidKeyReleased
         try {
             String query = "SELECT * FROM emptb WHERE employee_id = ?";
-            con = DriverManager.getConnection("jdbc:mysql://localhost/javadb", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/javadb", "root", "@kimalfred22");
 
             String sql = "SELECT * FROM emptb WHERE employee_id = ?";
             PreparedStatement pst = con.prepareStatement(sql);
@@ -452,7 +452,7 @@ public class Salary extends javax.swing.JInternalFrame {
 
             String url = "jdbc:mysql://localhost/javadb";
             String dbUsername = "root";
-            String dbPassword = "";
+            String dbPassword = "@kimalfred22";
 
             try (Connection con = DriverManager.getConnection(url, dbUsername, dbPassword)) {
                 con.setAutoCommit(false);
@@ -467,7 +467,7 @@ public class Salary extends javax.swing.JInternalFrame {
                     }
                 }
 
-                String insertQuery = "INSERT INTO payslip_tb (emp_id, name, email, position, `release`, ot_pay, deduction, salary) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                String insertQuery = "INSERT INTO payslip_tb (emp_id, name, email, position, payrec, ot_pay, deduction, salary) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
                 try (PreparedStatement pst = con.prepareStatement(insertQuery)) {
                     pst.setString(1, employeeId);
@@ -544,10 +544,10 @@ public class Salary extends javax.swing.JInternalFrame {
 
             String url = "jdbc:mysql://localhost/javadb";
             String dbUsername = "root";
-            String dbPassword = "";
+            String dbPassword = "@kimalfred22";
 
             try (Connection con = DriverManager.getConnection(url, dbUsername, dbPassword)) {
-                String updateQuery = "UPDATE payslip_tb SET name = ?, email = ?, position = ?, `release` = ?, ot_pay = ?, deduction = ?, salary = ? WHERE emp_id = ?";
+                String updateQuery = "UPDATE payslip_tb SET name = ?, email = ?, position = ?, payrec = ?, ot_pay = ?, deduction = ?, salary = ? WHERE emp_id = ?";
 
                 try (PreparedStatement pst = con.prepareStatement(updateQuery)) {                   
                     pst.setString(1, sname);
@@ -583,7 +583,7 @@ public class Salary extends javax.swing.JInternalFrame {
 
             if (!idToDelete.isEmpty()) {
                 String sql = "DELETE FROM payslip_tb WHERE emp_id =?";
-                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/javadb", "root", "");
+                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/javadb", "root", "@kimalfred22");
                 pst = con.prepareStatement(sql);
                 pst.setString(1, idToDelete);
                 int rowsAffected = pst.executeUpdate();

@@ -199,7 +199,7 @@ public class Login extends javax.swing.JFrame {
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
         try {
             String query = "SELECT * FROM `emptb` WHERE email=? and password =? and usertype=?";
-            con = DriverManager.getConnection("jdbc:mysql://localhost/javadb", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/javadb", "root", "@kimalfred22");
             pst = con.prepareStatement(query);
             pst.setString(1, email.getText());
             pst.setString(2, password.getText());

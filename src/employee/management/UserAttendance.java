@@ -365,7 +365,7 @@ public class UserAttendance extends javax.swing.JInternalFrame {
     private void searchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchKeyReleased
         try {
             String query = "SELECT * FROM emptb WHERE employee_id = ? OR name = ? OR email = ?";
-            con = DriverManager.getConnection("jdbc:mysql://localhost/javadb", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/javadb", "root", "@kimalfred22");
 
             String sql = "SELECT * FROM emptb WHERE employee_id = ? OR name = ? OR email = ?";
             PreparedStatement pst = con.prepareStatement(sql);
@@ -423,7 +423,7 @@ public class UserAttendance extends javax.swing.JInternalFrame {
 
             String url = "jdbc:mysql://localhost/javadb";
             String dbUsername = "root";
-            String dbPassword = "";
+            String dbPassword = "@kimalfred22";
 
             try (Connection con = DriverManager.getConnection(url, dbUsername, dbPassword)) {
         con.setAutoCommit(false); // Set auto-commit to false
@@ -463,7 +463,7 @@ public class UserAttendance extends javax.swing.JInternalFrame {
 
             String url = "jdbc:mysql://localhost/javadb";
             String dbUsername = "root";
-            String dbPassword = "";
+            String dbPassword = "@kimalfred22";
 
             try (Connection con = DriverManager.getConnection(url, dbUsername, dbPassword)) {
                 con.setAutoCommit(false);
