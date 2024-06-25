@@ -1,7 +1,7 @@
 # Employee Management System
 
 ## Overview
-The Employee Management System is a comprehensive application designed to manage various employee-related functions in an organization. This system allows for different roles (Admin, Manager, Employee) with specific permissions and capabilities. Key features include employee attendance, leave management, salary details, department management, and project assignments. 
+The Employee Management System is a comprehensive application designed to manage various employee-related functions in an organization. This system allows for different roles (Admin, Manager, Employee) with specific permissions and capabilities. Key features include employee attendance, leave management, salary details, generate payslip, department management, and project assignments. 
 
 ## Features
 - **Admin, Manager, and Employee Login:**
@@ -57,7 +57,7 @@ To enable email functionality in the project, follow these steps:
 2. Add the `mail.jar` file to your project's classpath.
 
 ### Implementing Email Functionality
-Here is the code snippet to set up the mailer in your Java application. This can be integrated into your email-sending logic in the application (e.g., for notifications).
+Here is the code snippet to set up the mailer in your Java application. This can be integrated into your email-sending logic in the application.
 
 ![javaemail](https://github.com/kimalfred/Employee-Management-System/assets/119164038/1c6a960f-2672-481b-9c85-83d833723927)
 
