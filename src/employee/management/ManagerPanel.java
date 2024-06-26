@@ -690,6 +690,7 @@ public class ManagerPanel extends javax.swing.JFrame {
         ManageSalary sal=new ManageSalary();
         manage.removeAll();
         manage.add(sal).setVisible(true);
+        sal.search.setText(email.getText());
     }//GEN-LAST:event_jLabel17MouseClicked
 
     private void jLabel17MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseEntered

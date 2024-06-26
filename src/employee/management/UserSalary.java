@@ -225,30 +225,37 @@ protected static double toPPI(double inch)
         empid.setBackground(new java.awt.Color(255, 255, 255));
         empid.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         empid.setForeground(new java.awt.Color(0, 0, 0));
+        empid.setEnabled(false);
 
         name.setBackground(new java.awt.Color(255, 255, 255));
         name.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         name.setForeground(new java.awt.Color(0, 0, 0));
+        name.setEnabled(false);
 
         email.setBackground(new java.awt.Color(255, 255, 255));
         email.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         email.setForeground(new java.awt.Color(0, 0, 0));
+        email.setEnabled(false);
 
         otpay.setBackground(new java.awt.Color(255, 255, 255));
         otpay.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         otpay.setForeground(new java.awt.Color(0, 0, 0));
+        otpay.setEnabled(false);
 
         post.setBackground(new java.awt.Color(255, 255, 255));
         post.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         post.setForeground(new java.awt.Color(0, 0, 0));
+        post.setEnabled(false);
 
         deduc.setBackground(new java.awt.Color(255, 255, 255));
         deduc.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         deduc.setForeground(new java.awt.Color(0, 0, 0));
+        deduc.setEnabled(false);
 
         release.setBackground(new java.awt.Color(255, 255, 255));
         release.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         release.setForeground(new java.awt.Color(0, 0, 0));
+        release.setEnabled(false);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -277,6 +284,7 @@ protected static double toPPI(double inch)
         salary.setBackground(new java.awt.Color(255, 255, 255));
         salary.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         salary.setForeground(new java.awt.Color(0, 0, 0));
+        salary.setEnabled(false);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
