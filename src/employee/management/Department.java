@@ -4,6 +4,7 @@
  */
 package employee.management;
 
+import java.awt.Color;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
@@ -34,6 +35,12 @@ public class Department extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         paysliptb = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        add = new javax.swing.JButton();
+        update = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        del = new javax.swing.JButton();
+        clear = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -56,20 +63,140 @@ public class Department extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(paysliptb);
 
+        jPanel2.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel2.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(255, 255, 0)));
+
+        add.setBackground(new java.awt.Color(255, 255, 255));
+        add.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        add.setForeground(new java.awt.Color(0, 0, 0));
+        add.setText("Add");
+        add.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                addMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                addMouseExited(evt);
+            }
+        });
+        add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addActionPerformed(evt);
+            }
+        });
+
+        update.setBackground(new java.awt.Color(255, 255, 255));
+        update.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        update.setForeground(new java.awt.Color(0, 0, 0));
+        update.setText("Update");
+        update.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                updateMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                updateMouseExited(evt);
+            }
+        });
+        update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("CBZ Departments");
+
+        del.setBackground(new java.awt.Color(255, 255, 255));
+        del.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        del.setForeground(new java.awt.Color(0, 0, 0));
+        del.setText("Delete");
+        del.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                delMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                delMouseExited(evt);
+            }
+        });
+        del.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delActionPerformed(evt);
+            }
+        });
+
+        clear.setBackground(new java.awt.Color(255, 255, 255));
+        clear.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        clear.setForeground(new java.awt.Color(0, 0, 0));
+        clear.setText("Clear");
+        clear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                clearMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                clearMouseExited(evt);
+            }
+        });
+        clear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(del, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(clear, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(add, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(update, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(add, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(update, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(clear, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(del, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12))
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 871, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(231, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 880, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 697, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 707, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -91,10 +218,209 @@ public class Department extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_paysliptbMouseClicked
 
+    private void addMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMouseEntered
+        Color clr=new Color(0, 0, 255);
+        add.setBackground(clr);
+    }//GEN-LAST:event_addMouseEntered
+
+    private void addMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMouseExited
+        Color clr=new Color(255,255,255);
+        add.setBackground(clr);
+    }//GEN-LAST:event_addMouseExited
+
+    private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
+        try {
+            String sname = name.getText();
+            String employeeId = empid.getText();
+            String semail = email.getText();
+            String posts = post.getText();
+            Date months = month.getDate();
+            String otpays = otpay.getText();
+            String deducs = deduc.getText();
+            String nets = net.getText();
+
+            if (sname.isEmpty() || employeeId.isEmpty() || semail.isEmpty() || posts.isEmpty() || months == null || otpays.isEmpty() || deducs.isEmpty() || nets.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please fill in all fields.");
+                return;
+            }
+
+            String url = "jdbc:mysql://localhost/javadb";
+            String dbUsername = "root";
+            String dbPassword = "@kimalfred22";
+
+            try (Connection con = DriverManager.getConnection(url, dbUsername, dbPassword)) {
+                con.setAutoCommit(false);
+
+                String checkQuery = "SELECT COUNT(*) FROM payslip_tb WHERE emp_id = ?";
+                try (PreparedStatement checkPst = con.prepareStatement(checkQuery)) {
+                    checkPst.setString(1, employeeId);
+                    ResultSet rs = checkPst.executeQuery();
+                    if (rs.next() && rs.getInt(1) > 0) {
+                        JOptionPane.showMessageDialog(this, "Employee already has a Payslip");
+                        return;
+                    }
+                }
+
+                String insertQuery = "INSERT INTO payslip_tb (emp_id, name, email, position, payrec, ot_pay, deduction, salary) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+                try (PreparedStatement pst = con.prepareStatement(insertQuery)) {
+                    pst.setString(1, employeeId);
+                    pst.setString(2, sname);
+                    pst.setString(3, semail);
+                    pst.setString(4, posts);
+
+                    java.sql.Date sqlStartDate = new java.sql.Date(months.getTime());
+                    pst.setDate(5, sqlStartDate);
+
+                    pst.setString(6, otpays);
+                    pst.setString(7, deducs);
+                    pst.setString(8, nets);
+
+                    int rowsAffected = pst.executeUpdate();
+
+                    if (rowsAffected > 0) {
+                        con.commit();
+                        JOptionPane.showMessageDialog(this, "Payslip Added to Employee");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Failed to add Payslip.");
+                    }
+                }
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, "An error occurred. Please check console for details.");
+                ex.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_addActionPerformed
+
+    private void updateMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateMouseEntered
+        Color clr=new Color(0, 0, 255);
+        update.setBackground(clr);
+    }//GEN-LAST:event_updateMouseEntered
+
+    private void updateMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateMouseExited
+        Color clr=new Color(255,255,255);
+        update.setBackground(clr);
+    }//GEN-LAST:event_updateMouseExited
+
+    private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
+        try {
+            String sname = name.getText();
+            String employeeId = empid.getText();
+            String semail = email.getText();
+            String posts = post.getText();
+            Date months = month.getDate();
+            String otpays = otpay.getText();
+            String deducs = deduc.getText();
+            String nets = net.getText();
+
+            if (sname.isEmpty() || employeeId.isEmpty() || semail.isEmpty() || posts.isEmpty() || months == null ||
+                otpays.isEmpty() || deducs.isEmpty() || nets.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please fill in all fields.");
+                return;
+            }
+
+            String url = "jdbc:mysql://localhost/javadb";
+            String dbUsername = "root";
+            String dbPassword = "@kimalfred22";
+
+            try (Connection con = DriverManager.getConnection(url, dbUsername, dbPassword)) {
+                String updateQuery = "UPDATE payslip_tb SET name = ?, email = ?, position = ?, payrec = ?, ot_pay = ?, deduction = ?, salary = ? WHERE emp_id = ?";
+
+                try (PreparedStatement pst = con.prepareStatement(updateQuery)) {
+                    pst.setString(1, sname);
+                    pst.setString(2, semail);
+                    pst.setString(3, posts);
+
+                    java.sql.Date sqlStartDate = new java.sql.Date(months.getTime());
+                    pst.setDate(4, sqlStartDate);
+
+                    pst.setString(5, otpays);
+                    pst.setString(6, deducs);
+                    pst.setString(7, nets);
+
+                    pst.setString(8, employeeId);
+                    int rowsAffected = pst.executeUpdate();
+
+                    if (rowsAffected > 0) {
+                        JOptionPane.showMessageDialog(this, "Update Successful!");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "No records updated. Employee ID not found.");
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "An error occurred. Please check console for details.");
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_updateActionPerformed
+
+    private void delMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_delMouseEntered
+        Color clr=new Color(0, 0, 255);
+        del.setBackground(clr);
+    }//GEN-LAST:event_delMouseEntered
+
+    private void delMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_delMouseExited
+        Color clr=new Color(255,255,255);
+        del.setBackground(clr);
+    }//GEN-LAST:event_delMouseExited
+
+    private void delActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delActionPerformed
+        try {
+            String idToDelete = empid.getText();
+
+            if (!idToDelete.isEmpty()) {
+                String sql = "DELETE FROM payslip_tb WHERE emp_id =?";
+                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/javadb", "root", "@kimalfred22");
+                pst = con.prepareStatement(sql);
+                pst.setString(1, idToDelete);
+                int rowsAffected = pst.executeUpdate();
+
+                if (rowsAffected > 0) {
+                    JOptionPane.showMessageDialog(null, "Delete Successfully");
+                } else {
+                    JOptionPane.showMessageDialog(null, "No records found with the specified Employee ID");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Please enter Employee ID to delete");
+            }
+        } catch (SQLException | HeadlessException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }//GEN-LAST:event_delActionPerformed
+
+    private void clearMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearMouseEntered
+        Color clr=new Color(0, 0, 255);
+        clear.setBackground(clr);
+    }//GEN-LAST:event_clearMouseEntered
+
+    private void clearMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearMouseExited
+        Color clr=new Color(255,255,255);
+        clear.setBackground(clr);
+    }//GEN-LAST:event_clearMouseExited
+
+    private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
+        empid.setText("");
+        name.setText("");
+        email.setText("");
+        post.setText("");
+        month.setDate(null);
+        otpay.setText("");
+        deduc.setText("");
+        net.setText("");
+    }//GEN-LAST:event_clearActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton add;
+    private javax.swing.JButton clear;
+    private javax.swing.JButton del;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable paysliptb;
+    private javax.swing.JButton update;
     // End of variables declaration//GEN-END:variables
 }
