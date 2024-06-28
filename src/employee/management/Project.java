@@ -92,7 +92,6 @@ public class Project extends javax.swing.JInternalFrame {
         deltxt3 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         add = new javax.swing.JButton();
-        seeproj = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         projecttbl = new javax.swing.JTable();
 
@@ -171,26 +170,6 @@ public class Project extends javax.swing.JInternalFrame {
             }
         });
 
-        seeproj.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        seeproj.setForeground(new java.awt.Color(0, 0, 0));
-        seeproj.setText("Projects");
-        seeproj.setToolTipText("");
-        seeproj.setActionCommand("Update Leave");
-        seeproj.setBorder(new javax.swing.border.MatteBorder(null));
-        seeproj.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                seeprojMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                seeprojMouseExited(evt);
-            }
-        });
-        seeproj.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                seeprojActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -204,8 +183,7 @@ public class Project extends javax.swing.JInternalFrame {
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(0, 66, Short.MAX_VALUE))
-                    .addComponent(add, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(seeproj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(add, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -221,8 +199,6 @@ public class Project extends javax.swing.JInternalFrame {
                 .addComponent(add, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(update4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(seeproj, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -337,20 +313,6 @@ public class Project extends javax.swing.JInternalFrame {
         a.setVisible(true);
     }//GEN-LAST:event_addActionPerformed
 
-    private void seeprojActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seeprojActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_seeprojActionPerformed
-
-    private void seeprojMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_seeprojMouseExited
-        Color clr=new Color(255,255,255);
-        seeproj.setBackground(clr);
-    }//GEN-LAST:event_seeprojMouseExited
-
-    private void seeprojMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_seeprojMouseEntered
-        Color clr=new Color(0, 0, 255);
-        seeproj.setBackground(clr);
-    }//GEN-LAST:event_seeprojMouseEntered
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton add;
@@ -361,7 +323,6 @@ public class Project extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable projecttbl;
-    private javax.swing.JButton seeproj;
     private javax.swing.JButton update4;
     // End of variables declaration//GEN-END:variables
 }

@@ -79,7 +79,6 @@ public class Employee extends javax.swing.JInternalFrame {
         emptbl = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         delete = new javax.swing.JButton();
-        print = new javax.swing.JButton();
         add = new javax.swing.JButton();
         deltxt = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -132,8 +131,6 @@ public class Employee extends javax.swing.JInternalFrame {
                 deleteActionPerformed(evt);
             }
         });
-
-        print.setText("Print");
 
         add.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         add.setForeground(new java.awt.Color(0, 0, 0));
@@ -203,7 +200,6 @@ public class Employee extends javax.swing.JInternalFrame {
                         .addGap(0, 32, Short.MAX_VALUE))
                     .addComponent(update, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addComponent(print, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,8 +216,6 @@ public class Employee extends javax.swing.JInternalFrame {
                 .addComponent(add, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(update, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56)
-                .addComponent(print, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -342,7 +336,6 @@ public class Employee extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton print;
     private javax.swing.JButton update;
     // End of variables declaration//GEN-END:variables
 }

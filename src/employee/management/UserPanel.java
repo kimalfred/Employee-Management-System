@@ -6,6 +6,11 @@ package employee.management;
 
 import static employee.management.Login.email;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.Timer;
 
 /**
  *
@@ -18,6 +23,27 @@ public class UserPanel extends javax.swing.JFrame {
      */
     public UserPanel() {
         initComponents();
+        showDate();
+        showTime();
+    }
+    void showDate() {
+        Date d = new Date();
+        SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
+        date.setText(s.format(d));
+
+    }
+
+    void showTime() {
+        new Timer(0, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Date d = new Date();
+                SimpleDateFormat s = new SimpleDateFormat("HH:mm:ss a ");
+                time.setText(s.format(d));
+            }
+        }
+        ).start();
+
     }
 
     /**
@@ -46,6 +72,10 @@ public class UserPanel extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         email = new javax.swing.JLabel();
         user = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        date = new javax.swing.JLabel();
+        time = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -288,15 +318,54 @@ public class UserPanel extends javax.swing.JFrame {
 
         user.setBackground(new java.awt.Color(51, 51, 51));
 
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/employee/management/build.png"))); // NOI18N
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("Welcome Employee!");
+
+        date.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        date.setForeground(new java.awt.Color(255, 255, 255));
+        date.setText("Date");
+
+        time.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        time.setForeground(new java.awt.Color(255, 255, 255));
+        time.setText("Time");
+
         javax.swing.GroupLayout userLayout = new javax.swing.GroupLayout(user);
         user.setLayout(userLayout);
         userLayout.setHorizontalGroup(
             userLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 850, Short.MAX_VALUE)
+            .addGroup(userLayout.createSequentialGroup()
+                .addGroup(userLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(userLayout.createSequentialGroup()
+                        .addGap(171, 171, 171)
+                        .addComponent(jLabel15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel14))
+                    .addGroup(userLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(time))
+                    .addGroup(userLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(date)))
+                .addContainerGap(162, Short.MAX_VALUE))
         );
         userLayout.setVerticalGroup(
             userLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 720, Short.MAX_VALUE)
+            .addGroup(userLayout.createSequentialGroup()
+                .addGroup(userLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(userLayout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(time)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(date)
+                        .addGap(138, 138, 138)
+                        .addComponent(jLabel14))
+                    .addGroup(userLayout.createSequentialGroup()
+                        .addGap(181, 181, 181)
+                        .addComponent(jLabel15)))
+                .addContainerGap(397, Short.MAX_VALUE))
         );
 
         getContentPane().add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 850, 720));
@@ -448,10 +517,13 @@ public class UserPanel extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel attend;
+    private javax.swing.JLabel date;
     public static javax.swing.JLabel email;
     private javax.swing.JPanel home;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -463,6 +535,7 @@ public class UserPanel extends javax.swing.JFrame {
     private javax.swing.JPanel proj;
     private javax.swing.JPanel sal;
     private javax.swing.JPanel sick;
+    private javax.swing.JLabel time;
     private javax.swing.JPanel user;
     // End of variables declaration//GEN-END:variables
 }
