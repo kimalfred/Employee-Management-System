@@ -5,7 +5,19 @@
 package employee.management;
 
 import java.awt.Color;
+import java.awt.HeadlessException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -13,15 +25,43 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  */
 public class Department extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form Department
-     */
+    Connection con = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
+    
     public Department() {
         initComponents();
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
         BasicInternalFrameUI ui=(BasicInternalFrameUI)this.getUI();
         ui.setNorthPane(null);
+        
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/javadb","root", "@kimalfred22");
+            pst=con.prepareStatement("Select * from dept_tb");
+            rs=pst.executeQuery();
+            ResultSetMetaData rsmd =rs.getMetaData();
+            int n=rsmd.getColumnCount();
+            DefaultTableModel dtm=(DefaultTableModel) dept_table.getModel();
+            dtm.setRowCount(0);
+            
+            while(rs.next()){
+                Vector v=new Vector();
+                for(int i=1;i<=n;i++){
+                    v.add(rs.getString("id"));
+                    v.add(rs.getString("department"));
+                }
+                //System.out.print(v);
+                dtm.addRow(v);
+            }
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);            
+        }
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -34,18 +74,18 @@ public class Department extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        paysliptb = new javax.swing.JTable();
+        dept_table = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         add = new javax.swing.JButton();
-        update = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        del = new javax.swing.JButton();
         clear = new javax.swing.JButton();
+        dept = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
 
-        paysliptb.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(102, 0, 0)));
-        paysliptb.setModel(new javax.swing.table.DefaultTableModel(
+        dept_table.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(102, 0, 0)));
+        dept_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -56,15 +96,16 @@ public class Department extends javax.swing.JInternalFrame {
                 "Number", "Department"
             }
         ));
-        paysliptb.addMouseListener(new java.awt.event.MouseAdapter() {
+        dept_table.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                paysliptbMouseClicked(evt);
+                dept_tableMouseClicked(evt);
             }
         });
-        jScrollPane3.setViewportView(paysliptb);
+        jScrollPane3.setViewportView(dept_table);
 
         jPanel2.setBackground(new java.awt.Color(102, 102, 102));
         jPanel2.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(255, 255, 0)));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         add.setBackground(new java.awt.Color(255, 255, 255));
         add.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -83,46 +124,12 @@ public class Department extends javax.swing.JInternalFrame {
                 addActionPerformed(evt);
             }
         });
-
-        update.setBackground(new java.awt.Color(255, 255, 255));
-        update.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        update.setForeground(new java.awt.Color(0, 0, 0));
-        update.setText("Update");
-        update.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                updateMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                updateMouseExited(evt);
-            }
-        });
-        update.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateActionPerformed(evt);
-            }
-        });
+        jPanel2.add(add, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 610, 200, 35));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("CBZ Departments");
-
-        del.setBackground(new java.awt.Color(255, 255, 255));
-        del.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        del.setForeground(new java.awt.Color(0, 0, 0));
-        del.setText("Delete");
-        del.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                delMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                delMouseExited(evt);
-            }
-        });
-        del.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                delActionPerformed(evt);
-            }
-        });
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 8, -1, -1));
 
         clear.setBackground(new java.awt.Color(255, 255, 255));
         clear.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -141,43 +148,17 @@ public class Department extends javax.swing.JInternalFrame {
                 clearActionPerformed(evt);
             }
         });
+        jPanel2.add(clear, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 650, 200, 35));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(del, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(clear, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(add, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(update, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(add, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(update, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(clear, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(del, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12))
-        );
+        dept.setBackground(new java.awt.Color(255, 255, 255));
+        dept.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        dept.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel2.add(dept, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 206, 40));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Department");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -185,19 +166,19 @@ public class Department extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 880, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 869, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+                .addGap(18, 18, 18))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 707, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane3)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 705, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -214,9 +195,12 @@ public class Department extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void paysliptbMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paysliptbMouseClicked
+    private void dept_tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dept_tableMouseClicked
+        DefaultTableModel model = (DefaultTableModel) dept_table.getModel();
+        int selectedIndex = dept_table.getSelectedRow();
         
-    }//GEN-LAST:event_paysliptbMouseClicked
+        dept.setText(model.getValueAt(selectedIndex, 1).toString());
+    }//GEN-LAST:event_dept_tableMouseClicked
 
     private void addMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMouseEntered
         Color clr=new Color(0, 0, 255);
@@ -230,16 +214,9 @@ public class Department extends javax.swing.JInternalFrame {
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
         try {
-            String sname = name.getText();
-            String employeeId = empid.getText();
-            String semail = email.getText();
-            String posts = post.getText();
-            Date months = month.getDate();
-            String otpays = otpay.getText();
-            String deducs = deduc.getText();
-            String nets = net.getText();
+            String depts = dept.getText();
 
-            if (sname.isEmpty() || employeeId.isEmpty() || semail.isEmpty() || posts.isEmpty() || months == null || otpays.isEmpty() || deducs.isEmpty() || nets.isEmpty()) {
+            if (depts.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Please fill in all fields.");
                 return;
             }
@@ -249,40 +226,20 @@ public class Department extends javax.swing.JInternalFrame {
             String dbPassword = "@kimalfred22";
 
             try (Connection con = DriverManager.getConnection(url, dbUsername, dbPassword)) {
-                con.setAutoCommit(false);
+                con.setAutoCommit(false);              
 
-                String checkQuery = "SELECT COUNT(*) FROM payslip_tb WHERE emp_id = ?";
-                try (PreparedStatement checkPst = con.prepareStatement(checkQuery)) {
-                    checkPst.setString(1, employeeId);
-                    ResultSet rs = checkPst.executeQuery();
-                    if (rs.next() && rs.getInt(1) > 0) {
-                        JOptionPane.showMessageDialog(this, "Employee already has a Payslip");
-                        return;
-                    }
-                }
-
-                String insertQuery = "INSERT INTO payslip_tb (emp_id, name, email, position, payrec, ot_pay, deduction, salary) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                String insertQuery = "INSERT INTO dept_tb (department) VALUES (?)";
 
                 try (PreparedStatement pst = con.prepareStatement(insertQuery)) {
-                    pst.setString(1, employeeId);
-                    pst.setString(2, sname);
-                    pst.setString(3, semail);
-                    pst.setString(4, posts);
-
-                    java.sql.Date sqlStartDate = new java.sql.Date(months.getTime());
-                    pst.setDate(5, sqlStartDate);
-
-                    pst.setString(6, otpays);
-                    pst.setString(7, deducs);
-                    pst.setString(8, nets);
+                    pst.setString(1, depts);
 
                     int rowsAffected = pst.executeUpdate();
 
                     if (rowsAffected > 0) {
                         con.commit();
-                        JOptionPane.showMessageDialog(this, "Payslip Added to Employee");
+                        JOptionPane.showMessageDialog(this, "Department Added.");
                     } else {
-                        JOptionPane.showMessageDialog(this, "Failed to add Payslip.");
+                        JOptionPane.showMessageDialog(this, "Failed to add Department.");
                     }
                 }
             } catch (SQLException ex) {
@@ -293,102 +250,6 @@ public class Department extends javax.swing.JInternalFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_addActionPerformed
-
-    private void updateMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateMouseEntered
-        Color clr=new Color(0, 0, 255);
-        update.setBackground(clr);
-    }//GEN-LAST:event_updateMouseEntered
-
-    private void updateMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateMouseExited
-        Color clr=new Color(255,255,255);
-        update.setBackground(clr);
-    }//GEN-LAST:event_updateMouseExited
-
-    private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
-        try {
-            String sname = name.getText();
-            String employeeId = empid.getText();
-            String semail = email.getText();
-            String posts = post.getText();
-            Date months = month.getDate();
-            String otpays = otpay.getText();
-            String deducs = deduc.getText();
-            String nets = net.getText();
-
-            if (sname.isEmpty() || employeeId.isEmpty() || semail.isEmpty() || posts.isEmpty() || months == null ||
-                otpays.isEmpty() || deducs.isEmpty() || nets.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Please fill in all fields.");
-                return;
-            }
-
-            String url = "jdbc:mysql://localhost/javadb";
-            String dbUsername = "root";
-            String dbPassword = "@kimalfred22";
-
-            try (Connection con = DriverManager.getConnection(url, dbUsername, dbPassword)) {
-                String updateQuery = "UPDATE payslip_tb SET name = ?, email = ?, position = ?, payrec = ?, ot_pay = ?, deduction = ?, salary = ? WHERE emp_id = ?";
-
-                try (PreparedStatement pst = con.prepareStatement(updateQuery)) {
-                    pst.setString(1, sname);
-                    pst.setString(2, semail);
-                    pst.setString(3, posts);
-
-                    java.sql.Date sqlStartDate = new java.sql.Date(months.getTime());
-                    pst.setDate(4, sqlStartDate);
-
-                    pst.setString(5, otpays);
-                    pst.setString(6, deducs);
-                    pst.setString(7, nets);
-
-                    pst.setString(8, employeeId);
-                    int rowsAffected = pst.executeUpdate();
-
-                    if (rowsAffected > 0) {
-                        JOptionPane.showMessageDialog(this, "Update Successful!");
-                    } else {
-                        JOptionPane.showMessageDialog(this, "No records updated. Employee ID not found.");
-                    }
-                }
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "An error occurred. Please check console for details.");
-            ex.printStackTrace();
-        }
-    }//GEN-LAST:event_updateActionPerformed
-
-    private void delMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_delMouseEntered
-        Color clr=new Color(0, 0, 255);
-        del.setBackground(clr);
-    }//GEN-LAST:event_delMouseEntered
-
-    private void delMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_delMouseExited
-        Color clr=new Color(255,255,255);
-        del.setBackground(clr);
-    }//GEN-LAST:event_delMouseExited
-
-    private void delActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delActionPerformed
-        try {
-            String idToDelete = empid.getText();
-
-            if (!idToDelete.isEmpty()) {
-                String sql = "DELETE FROM payslip_tb WHERE emp_id =?";
-                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/javadb", "root", "@kimalfred22");
-                pst = con.prepareStatement(sql);
-                pst.setString(1, idToDelete);
-                int rowsAffected = pst.executeUpdate();
-
-                if (rowsAffected > 0) {
-                    JOptionPane.showMessageDialog(null, "Delete Successfully");
-                } else {
-                    JOptionPane.showMessageDialog(null, "No records found with the specified Employee ID");
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Please enter Employee ID to delete");
-            }
-        } catch (SQLException | HeadlessException ex) {
-            JOptionPane.showMessageDialog(null, ex);
-        }
-    }//GEN-LAST:event_delActionPerformed
 
     private void clearMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearMouseEntered
         Color clr=new Color(0, 0, 255);
@@ -401,26 +262,19 @@ public class Department extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_clearMouseExited
 
     private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
-        empid.setText("");
-        name.setText("");
-        email.setText("");
-        post.setText("");
-        month.setDate(null);
-        otpay.setText("");
-        deduc.setText("");
-        net.setText("");
+        dept.setText("");
     }//GEN-LAST:event_clearActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton add;
     private javax.swing.JButton clear;
-    private javax.swing.JButton del;
+    private javax.swing.JTextField dept;
+    private javax.swing.JTable dept_table;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable paysliptb;
-    private javax.swing.JButton update;
     // End of variables declaration//GEN-END:variables
 }
