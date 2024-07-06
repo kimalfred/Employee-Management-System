@@ -1,4 +1,5 @@
 # Employee Management System
+![image](https://github.com/kimalfred/Employee-Management-System/assets/119164038/d9f22ee1-87af-4d79-9217-1c22a55a3241)
 
 ## Overview
 The Employee Management System is a comprehensive application designed to manage various employee-related functions in an organization. This system allows for different roles (Admin, Manager, Employee) with specific permissions and capabilities. Key features include employee attendance, leave management, salary details, generate payslip, department management, and project assignments. 
